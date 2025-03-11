@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/MainActivity.kt
-package com.kku.emergencystaff
+package com.example.sosstaff
 
 import android.content.Intent
 import android.os.Bundle

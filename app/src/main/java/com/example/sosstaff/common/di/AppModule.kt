@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/common/di/AppModule.kt
-package com.kku.emergencystaff.common.di
+package com.example.sosstaff.common.di
 
 import com.kku.emergencystaff.auth.repository.AuthRepository
 import com.kku.emergencystaff.main.chat.repository.ChatRepository

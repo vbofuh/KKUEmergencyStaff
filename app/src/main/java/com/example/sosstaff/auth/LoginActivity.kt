@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/auth/LoginActivity.kt
-package com.kku.emergencystaff.auth
+package com.example.sosstaff.auth
 
 import android.content.Intent
 import android.os.Bundle

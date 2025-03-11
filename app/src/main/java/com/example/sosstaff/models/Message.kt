@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/models/Message.kt
-package com.kku.emergencystaff.models
+package com.example.sosstaff.models
 
 import com.google.firebase.firestore.DocumentId
 import java.util.Date

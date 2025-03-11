@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/auth/LoginViewModel.kt
-package com.kku.emergencystaff.auth
+package com.example.sosstaff.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

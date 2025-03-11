@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/common/utils/NotificationUtils.kt
-package com.kku.emergencystaff.common.utils
+package com.example.sosstaff.common.utils
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

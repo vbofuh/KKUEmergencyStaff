@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/common/utils/DateUtils.kt
-package com.kku.emergencystaff.common.utils
+package com.example.sosstaff.common.utils
 
 import java.text.SimpleDateFormat
 import java.util.Calendar

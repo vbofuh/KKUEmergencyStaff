@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/auth/repository/AuthRepository.kt
-package com.kku.emergencystaff.auth.repository
+package com.example.sosstaff.auth.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

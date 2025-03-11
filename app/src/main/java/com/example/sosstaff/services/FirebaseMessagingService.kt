@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/services/FirebaseMessagingService.kt
-package com.kku.emergencystaff.services
+package com.example.sosstaff.services
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
