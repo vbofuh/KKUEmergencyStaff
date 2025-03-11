@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- ชุดสีหลัก -->
+    <color name="myred">#B71C1C</color>
+    <color name="mylightred">#D32F2F</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- สำหรับพื้นหลัง -->
+    <color name="light_bg">#F5F5F5</color>
+    <color name="chat_bg">#ECE5DD</color>
+
+    <!-- สีสำหรับแชท -->
+    <color name="chat_active">#4CAF50</color>
+    <color name="chat_inactive">#9E9E9E</color>
+    <color name="chat_active_bg">#E8F5E9</color>
+    <color name="chat_inactive_bg">#F5F5F5</color>
+
+    <!-- สีสำหรับสถานะ -->
+    <color name="status_waiting">#FF9800</color>
+    <color name="status_assigned">#2196F3</color>
+    <color name="status_in_progress">#4CAF50</color>
+    <color name="status_completed">#9E9E9E</color>
+    <color name="status_available">#4CAF50</color>
+    <color name="status_working">#2196F3</color>
+    <color name="status_offline">#9E9E9E</color>
+
+    <!-- สีเทา -->
+    <color name="light_gray">#E0E0E0</color>
+    <color name="medium_gray">#9E9E9E</color>
+    <color name="dark_gray">#757575</color>
 </resources>
