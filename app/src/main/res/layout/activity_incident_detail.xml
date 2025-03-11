@@ -130,6 +130,25 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="ประเภท: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvIncidentType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="อุบัติเหตุบนถนน" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="แจ้งเมื่อ: "
                             android:textStyle="bold" />
 
@@ -138,6 +157,102 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:text="12/02/2025 14:30" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ผู้แจ้ง: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvReporterName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="กันตวิชญ์ สุรี" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="เบอร์โทรศัพท์: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvReporterPhone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="081-234-5678" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="เกี่ยวข้องเป็น: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvRelationToVictim"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="ผู้เห็นเหตุการณ์" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="สถานที่: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:text="อาคาร 4 ชั้น 2 ห้อง 203 คณะวิทยาศาสตร์" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ข้อมูลเพิ่มเติม: "
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvAdditionalInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            tools:text="เพื่อนมอบบังไม่รู้สึกตัวเลยครับ มีลูกศิษย์คนนึงช่วยดูอยู่ตอนนี้ โทรมาหาผมให้ช่วยแจ้งเหตุด่วนครับ" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -236,9 +351,9 @@
                         android:layout_height="200dp"
                         android:layout_marginTop="8dp">
 
-                        <fragment
-                            android:id="@+id/mapFragment"
-                            android:name="com.google.android.gms.maps.SupportMapFragment"
+                        <!-- แทนที่ <fragment> ด้วย <FrameLayout> แทนเพื่อแก้ปัญหา -->
+                        <FrameLayout
+                            android:id="@+id/mapContainer"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
 
@@ -249,7 +364,7 @@
                             android:gravity="center"
                             android:text="ไม่มีข้อมูลตำแหน่ง"
                             android:textColor="@color/dark_gray"
-                            android:visibility="gone" />
+                            android:visibility="visible" />
                     </FrameLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -292,119 +407,4 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>content"
-    android:orientation="horizontal"
-    android:layout_marginTop="8dp">
-
-<TextView
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="ประเภท: "
-android:textStyle="bold" />
-
-<TextView
-android:id="@+id/tvIncidentType"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-tools:text="อุบัติเหตุบนถนน" />
-    </LinearLayout>
-
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="horizontal"
-android:layout_marginTop="8dp">
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="ผู้แจ้ง: "
-    android:textStyle="bold" />
-
-<TextView
-    android:id="@+id/tvReporterName"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    tools:text="กันตวิชญ์ สุรี" />
-</LinearLayout>
-
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="horizontal"
-android:layout_marginTop="8dp">
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="เบอร์โทรศัพท์: "
-    android:textStyle="bold" />
-
-<TextView
-    android:id="@+id/tvReporterPhone"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    tools:text="081-234-5678" />
-</LinearLayout>
-
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="horizontal"
-android:layout_marginTop="8dp">
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="เกี่ยวข้องเป็น: "
-    android:textStyle="bold" />
-
-<TextView
-    android:id="@+id/tvRelationToVictim"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    tools:text="ผู้เห็นเหตุการณ์" />
-</LinearLayout>
-
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="horizontal"
-android:layout_marginTop="8dp">
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="สถานที่: "
-    android:textStyle="bold" />
-
-<TextView
-    android:id="@+id/tvLocation"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:text="อาคาร 4 ชั้น 2 ห้อง 203 คณะวิทยาศาสตร์" />
-</LinearLayout>
-
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="vertical"
-android:layout_marginTop="8dp">
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="ข้อมูลเพิ่มเติม: "
-    android:textStyle="bold" />
-
-<TextView
-    android:id="@+id/tvAdditionalInfo"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    tools:text="เพื่อนมอบบังไม่รู้สึกตัวเลยครับ มีลูกศิษย์คนนึงช่วยดูอยู่ตอนนี้ โทรมาหาผมให้ช่วยแจ้งเหตุด่วนครับ" />
-</LinearLayout>
-
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
