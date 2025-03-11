@@ -1,47 +1,63 @@
-package com.example.sosstaff
+// พาธ: com.kku.emergencystaff/MainActivity.kt
+package com.kku.emergencystaff
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.sosstaff.ui.theme.SOSStaffTheme
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.firebase.auth.FirebaseAuth
+import com.kku.emergencystaff.auth.LoginActivity
+import com.kku.emergencystaff.main.MainContainer
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            SOSStaffTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+
+        // Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
+
+        // Check if user is signed in
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            // ตรวจสอบว่าผู้ใช้เป็นเจ้าหน้าที่
+            checkIfUserIsStaff(currentUser.uid)
+        } else {
+            // ไม่มีผู้ใช้ล็อกอินอยู่
+            navigateToLogin()
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    private fun checkIfUserIsStaff(uid: String) {
+        val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+        db.collection("staff").document(uid)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    // ผู้ใช้เป็นเจ้าหน้าที่
+                    navigateToMainContainer()
+                } else {
+                    // ผู้ใช้ไม่ใช่เจ้าหน้าที่
+                    auth.signOut()
+                    navigateToLogin()
+                }
+            }
+            .addOnFailureListener {
+                // เกิดข้อผิดพลาดในการตรวจสอบ
+                auth.signOut()
+                navigateToLogin()
+            }
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SOSStaffTheme {
-        Greeting("Android")
+    private fun navigateToLogin() {
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
+    }
+
+    private fun navigateToMainContainer() {
+        startActivity(Intent(this, MainContainer::class.java))
+        finish()
     }
 }

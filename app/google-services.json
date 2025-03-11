@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "122548909838",
+    "project_id": "kkuemergency",
+    "storage_bucket": "kkuemergency.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122548909838:android:6c4b63bd2e0d3ee1e8895f",
+        "android_client_info": {
+          "package_name": "com.example.sos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiLIX9AHbddXWOQrFUvXPrcoyZmHbvT-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122548909838:android:79f02e4251477a05e8895f",
+        "android_client_info": {
+          "package_name": "com.example.sosstaff"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiLIX9AHbddXWOQrFUvXPrcoyZmHbvT-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
