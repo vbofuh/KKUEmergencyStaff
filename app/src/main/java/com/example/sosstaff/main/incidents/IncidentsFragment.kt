@@ -16,8 +16,6 @@ import com.example.sosstaff.databinding.FragmentIncidentsBinding
 import com.example.sosstaff.main.incidents.adapters.IncidentAdapter
 import com.example.sosstaff.main.incidents.viewmodels.IncidentsViewModel
 import com.example.sosstaff.models.Incident
-import dagger.hilt.android.AndroidEntryPoint
-
 
 class IncidentsFragment : Fragment() {
 

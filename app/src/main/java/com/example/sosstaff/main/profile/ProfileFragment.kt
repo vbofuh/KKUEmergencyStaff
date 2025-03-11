@@ -14,8 +14,6 @@ import com.example.sosstaff.R
 import com.example.sosstaff.auth.LoginActivity
 import com.example.sosstaff.databinding.FragmentProfileBinding
 import com.example.sosstaff.main.profile.viewmodels.ProfileViewModel
-import dagger.hilt.android.AndroidEntryPoint
-
 
 class ProfileFragment : Fragment() {
 

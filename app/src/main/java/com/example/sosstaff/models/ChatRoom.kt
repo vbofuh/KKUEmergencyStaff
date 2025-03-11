@@ -32,7 +32,7 @@ data class ChatRoom(
     // เมธอดสำหรับจัดรูปแบบเวลาข้อความล่าสุด
     fun getFormattedLastMessageTime(): String {
         // สร้างรูปแบบเวลาที่เหมาะสม (อาจใช้ DateUtils จากโค้ดก่อนหน้า)
-        return com.kku.emergencystaff.common.utils.DateUtils.getRelativeTimeSpan(lastMessageTime.time)
+        return com.example.sosstaff.common.utils.DateUtils.getRelativeTimeSpan(lastMessageTime.time)
     }
 
     // เมธอดสำหรับตรวจสอบว่าข้อความล่าสุดส่งโดยเจ้าหน้าที่คนนี้หรือไม่

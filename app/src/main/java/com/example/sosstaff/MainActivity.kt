@@ -6,13 +6,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.auth.FirebaseAuth
-import com.kku.emergencystaff.auth.LoginActivity
-import com.kku.emergencystaff.main.MainContainer
+import com.google.firebase.firestore.FirebaseFirestore
+import com.example.sosstaff.auth.LoginActivity
+import com.example.sosstaff.main.MainContainer
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val db = FirebaseFirestore.getInstance()
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkIfUserIsStaff(uid: String) {
-        val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+        val db = FirebaseFirestore.getInstance()
         db.collection("staff").document(uid)
             .get()
             .addOnSuccessListener { document ->

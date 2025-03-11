@@ -15,7 +15,6 @@ import com.example.sosstaff.main.MainContainer
 import com.example.sosstaff.main.chat.adapters.ChatRoomAdapter
 import com.example.sosstaff.main.chat.viewmodels.ChatViewModel
 import com.example.sosstaff.models.ChatRoom
-import dagger.hilt.android.AndroidEntryPoint
 
 
 class ChatListFragment : Fragment() {

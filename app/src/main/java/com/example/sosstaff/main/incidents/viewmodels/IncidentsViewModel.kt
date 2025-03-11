@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sosstaff.main.incidents.repository.IncidentsRepository
 import com.example.sosstaff.models.Incident
-import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 

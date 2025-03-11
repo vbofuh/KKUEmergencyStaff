@@ -90,6 +90,7 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.4.0")
     implementation("io.insert-koin:koin-androidx-compose:3.4.0")
 
+    implementation("androidx.core:core-splashscreen:1.0.0")
 
 }
 

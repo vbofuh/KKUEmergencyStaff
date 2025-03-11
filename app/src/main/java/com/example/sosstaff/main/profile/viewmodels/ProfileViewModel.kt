@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sosstaff.main.profile.repository.ProfileRepository
 import com.example.sosstaff.models.StaffUser
-import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 

@@ -28,12 +28,12 @@ data class Message(
 
     // เมธอดสำหรับจัดรูปแบบเวลาข้อความ
     fun getFormattedTime(): String {
-        return com.kku.emergencystaff.common.utils.DateUtils.formatTime(timestamp.time)
+        return com.example.sosstaff.common.utils.DateUtils.formatTime(timestamp.time)
     }
 
     // เมธอดสำหรับจัดรูปแบบวันที่ข้อความ (สำหรับแสดงในส่วนหัวของวัน)
     fun getFormattedDate(): String {
-        return com.kku.emergencystaff.common.utils.DateUtils.formatDateForHeader(timestamp.time)
+        return com.example.sosstaff.common.utils.DateUtils.formatDateForHeader(timestamp.time)
     }
 
     // เมธอดสำหรับตรวจสอบว่าข้อความนี้มีรูปภาพหรือไม่

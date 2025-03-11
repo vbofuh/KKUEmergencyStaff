@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.example.sosstaff.main.chat.repository.ChatRepository
 import com.example.sosstaff.models.ChatRoom
 import com.example.sosstaff.models.Message
-import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 

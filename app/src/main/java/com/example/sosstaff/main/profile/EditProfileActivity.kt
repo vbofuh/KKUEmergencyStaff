@@ -7,8 +7,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sosstaff.databinding.ActivityEditProfileBinding
 import com.example.sosstaff.main.profile.viewmodels.ProfileViewModel
-import dagger.hilt.android.AndroidEntryPoint
-
 
 class EditProfileActivity : AppCompatActivity() {
 
