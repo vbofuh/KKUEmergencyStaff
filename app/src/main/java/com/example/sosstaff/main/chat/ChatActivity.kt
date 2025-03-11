@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/main/chat/ChatActivity.kt
-package com.kku.emergencystaff.main.chat
+package com.example.sosstaff.main.chat
 
 import android.os.Bundle
 import android.view.View
@@ -8,9 +8,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import com.kku.emergencystaff.databinding.ActivityChatBinding
-import com.kku.emergencystaff.main.chat.adapters.MessageAdapter
-import com.kku.emergencystaff.main.chat.viewmodels.ChatViewModel
+import com.example.sosstaff.databinding.ActivityChatBinding
+import com.example.sosstaff.main.chat.adapters.MessageAdapter
+import com.example.sosstaff.main.chat.viewmodels.ChatViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

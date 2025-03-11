@@ -1,14 +1,14 @@
 // พาธ: com.kku.emergencystaff/main/chat/viewmodels/ChatViewModel.kt
-package com.kku.emergencystaff.main.chat.viewmodels
+package com.example.sosstaff.main.chat.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.kku.emergencystaff.main.chat.repository.ChatRepository
-import com.kku.emergencystaff.models.ChatRoom
-import com.kku.emergencystaff.models.Message
+import com.example.sosstaff.main.chat.repository.ChatRepository
+import com.example.sosstaff.models.ChatRoom
+import com.example.sosstaff.models.Message
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/main/profile/ProfileFragment.kt
-package com.kku.emergencystaff.main.profile
+package com.example.sosstaff.main.profile
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,10 +10,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.kku.emergencystaff.R
-import com.kku.emergencystaff.auth.LoginActivity
-import com.kku.emergencystaff.databinding.FragmentProfileBinding
-import com.kku.emergencystaff.main.profile.viewmodels.ProfileViewModel
+import com.example.sosstaff.R
+import com.example.sosstaff.auth.LoginActivity
+import com.example.sosstaff.databinding.FragmentProfileBinding
+import com.example.sosstaff.main.profile.viewmodels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

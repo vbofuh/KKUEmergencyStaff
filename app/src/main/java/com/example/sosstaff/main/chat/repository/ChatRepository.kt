@@ -1,13 +1,13 @@
 // พาธ: com.kku.emergencystaff/main/chat/repository/ChatRepository.kt
-package com.kku.emergencystaff.main.chat.repository
+package com.example.sosstaff.main.chat.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.kku.emergencystaff.models.ChatRoom
-import com.kku.emergencystaff.models.Message
+import com.example.sosstaff.models.ChatRoom
+import com.example.sosstaff.models.Message
 import java.util.Date
 import javax.inject.Inject
 import javax.inject.Singleton

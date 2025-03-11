@@ -4,7 +4,7 @@ package com.example.sosstaff.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kku.emergencystaff.auth.repository.AuthRepository
+import com.example.sosstaff.auth.repository.AuthRepository
 
 class LoginViewModel(private val repository: AuthRepository) : ViewModel() {
 

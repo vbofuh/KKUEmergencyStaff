@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/main/incidents/IncidentsFragment.kt
-package com.kku.emergencystaff.main.incidents
+package com.example.sosstaff.main.incidents
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
-import com.kku.emergencystaff.R
-import com.kku.emergencystaff.databinding.FragmentIncidentsBinding
-import com.kku.emergencystaff.main.incidents.adapters.IncidentAdapter
-import com.kku.emergencystaff.main.incidents.viewmodels.IncidentsViewModel
-import com.kku.emergencystaff.models.Incident
+import com.example.sosstaff.R
+import com.example.sosstaff.databinding.FragmentIncidentsBinding
+import com.example.sosstaff.main.incidents.adapters.IncidentAdapter
+import com.example.sosstaff.main.incidents.viewmodels.IncidentsViewModel
+import com.example.sosstaff.models.Incident
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,11 +1,11 @@
 // พาธ: com.kku.emergencystaff/main/profile/viewmodels/ProfileViewModel.kt
-package com.kku.emergencystaff.main.profile.viewmodels
+package com.example.sosstaff.main.profile.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kku.emergencystaff.main.profile.repository.ProfileRepository
-import com.kku.emergencystaff.models.StaffUser
+import com.example.sosstaff.main.profile.repository.ProfileRepository
+import com.example.sosstaff.models.StaffUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

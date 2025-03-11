@@ -1,11 +1,11 @@
 // พาธ: com.kku.emergencystaff/main/profile/repository/ProfileRepository.kt
-package com.kku.emergencystaff.main.profile.repository
+package com.example.sosstaff.main.profile.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.kku.emergencystaff.models.StaffUser
+import com.example.sosstaff.models.StaffUser
 import java.util.Date
 import javax.inject.Inject
 import javax.inject.Singleton

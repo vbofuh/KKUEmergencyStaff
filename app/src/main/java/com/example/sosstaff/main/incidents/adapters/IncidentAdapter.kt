@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/main/incidents/adapters/IncidentAdapter.kt
-package com.kku.emergencystaff.main.incidents.adapters
+package com.example.sosstaff.main.incidents.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +10,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.kku.emergencystaff.R
-import com.kku.emergencystaff.common.utils.DateUtils
-import com.kku.emergencystaff.models.Incident
+import com.example.sosstaff.R
+import com.example.sosstaff.common.utils.DateUtils
+import com.example.sosstaff.models.Incident
 
 class IncidentAdapter(
     private val onItemClick: (Incident) -> Unit

@@ -10,9 +10,9 @@ import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.example.sosstaff.R
-import com.kku.emergencystaff.main.MainContainer
-import com.kku.emergencystaff.main.chat.ChatActivity
-import com.kku.emergencystaff.main.incidents.IncidentDetailActivity
+import com.example.sosstaff.main.MainContainer
+import com.example.sosstaff.main.chat.ChatActivity
+import com.example.sosstaff.main.incidents.IncidentDetailActivity
 
 object NotificationUtils {
 

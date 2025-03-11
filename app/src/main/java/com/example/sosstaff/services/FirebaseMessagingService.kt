@@ -14,11 +14,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.kku.emergencystaff.R
-import com.kku.emergencystaff.common.utils.NotificationUtils
-import com.kku.emergencystaff.main.MainContainer
-import com.kku.emergencystaff.main.chat.ChatActivity
-import com.kku.emergencystaff.main.incidents.IncidentDetailActivity
+import com.example.sosstaff.R
+import com.example.sosstaff.common.utils.NotificationUtils
+import com.example.sosstaff.main.MainContainer
+import com.example.sosstaff.main.chat.ChatActivity
+import com.example.sosstaff.main.incidents.IncidentDetailActivity
 
 class AppFirebaseMessagingService : FirebaseMessagingService() {
 

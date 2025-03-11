@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/main/MainContainer.kt
-package com.kku.emergencystaff.main
+package com.example.sosstaff.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,13 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.kku.emergencystaff.R
-import com.kku.emergencystaff.auth.LoginActivity
-import com.kku.emergencystaff.auth.repository.AuthRepository
-import com.kku.emergencystaff.common.utils.NotificationUtils
-import com.kku.emergencystaff.main.chat.ChatListFragment
-import com.kku.emergencystaff.main.incidents.IncidentsFragment
-import com.kku.emergencystaff.main.profile.ProfileFragment
+import com.example.sosstaff.R
+import com.example.sosstaff.auth.LoginActivity
+import com.example.sosstaff.auth.repository.AuthRepository
+import com.example.sosstaff.common.utils.NotificationUtils
+import com.example.sosstaff.main.chat.ChatListFragment
+import com.example.sosstaff.main.incidents.IncidentsFragment
+import com.example.sosstaff.main.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

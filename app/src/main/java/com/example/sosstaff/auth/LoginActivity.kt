@@ -11,8 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.sosstaff.R
-import com.kku.emergencystaff.auth.repository.AuthRepository
-import com.kku.emergencystaff.main.MainContainer
+import com.example.sosstaff.auth.repository.AuthRepository
+import com.example.sosstaff.main.MainContainer
 
 class LoginActivity : AppCompatActivity() {
 

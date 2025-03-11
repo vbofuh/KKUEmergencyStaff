@@ -1,12 +1,12 @@
 // พาธ: com.kku.emergencystaff/main/incidents/viewmodels/IncidentsViewModel.kt
-package com.kku.emergencystaff.main.incidents.viewmodels
+package com.example.sosstaff.main.incidents.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kku.emergencystaff.main.incidents.repository.IncidentsRepository
-import com.kku.emergencystaff.models.Incident
+import com.example.sosstaff.main.incidents.repository.IncidentsRepository
+import com.example.sosstaff.models.Incident
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

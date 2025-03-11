@@ -1,12 +1,12 @@
 // พาธ: com.kku.emergencystaff/main/profile/EditProfileActivity.kt
-package com.kku.emergencystaff.main.profile
+package com.example.sosstaff.main.profile
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.kku.emergencystaff.databinding.ActivityEditProfileBinding
-import com.kku.emergencystaff.main.profile.viewmodels.ProfileViewModel
+import com.example.sosstaff.databinding.ActivityEditProfileBinding
+import com.example.sosstaff.main.profile.viewmodels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/main/incidents/IncidentDetailActivity.kt
-package com.kku.emergencystaff.main.incidents
+package com.example.sosstaff.main.incidents
 
 import android.content.Intent
 import android.net.Uri
@@ -11,12 +11,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.kku.emergencystaff.R
-import com.kku.emergencystaff.common.utils.DateUtils
-import com.kku.emergencystaff.databinding.ActivityIncidentDetailBinding
-import com.kku.emergencystaff.main.chat.ChatActivity
-import com.kku.emergencystaff.main.incidents.viewmodels.IncidentsViewModel
-import com.kku.emergencystaff.models.Incident
+import com.example.sosstaff.R
+import com.example.sosstaff.common.utils.DateUtils
+import com.example.sosstaff.databinding.ActivityIncidentDetailBinding
+import com.example.sosstaff.main.chat.ChatActivity
+import com.example.sosstaff.main.incidents.viewmodels.IncidentsViewModel
+import com.example.sosstaff.models.Incident
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

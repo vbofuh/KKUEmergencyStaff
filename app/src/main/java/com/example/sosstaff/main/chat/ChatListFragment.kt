@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/main/chat/ChatListFragment.kt
-package com.kku.emergencystaff.main.chat
+package com.example.sosstaff.main.chat
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
-import com.kku.emergencystaff.databinding.FragmentChatListBinding
-import com.kku.emergencystaff.main.MainContainer
-import com.kku.emergencystaff.main.chat.adapters.ChatRoomAdapter
-import com.kku.emergencystaff.main.chat.viewmodels.ChatViewModel
-import com.kku.emergencystaff.models.ChatRoom
+import com.example.sosstaff.databinding.FragmentChatListBinding
+import com.example.sosstaff.main.MainContainer
+import com.example.sosstaff.main.chat.adapters.ChatRoomAdapter
+import com.example.sosstaff.main.chat.viewmodels.ChatViewModel
+import com.example.sosstaff.models.ChatRoom
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

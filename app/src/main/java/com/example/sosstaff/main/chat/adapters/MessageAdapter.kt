@@ -1,5 +1,5 @@
 // พาธ: com.kku.emergencystaff/main/chat/adapters/MessageAdapter.kt
-package com.kku.emergencystaff.main.chat.adapters
+package com.example.sosstaff.main.chat.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.kku.emergencystaff.R
-import com.kku.emergencystaff.models.Message
+import com.example.sosstaff.R
+import com.example.sosstaff.models.Message
 import java.util.Calendar
 
 class MessageAdapter(
