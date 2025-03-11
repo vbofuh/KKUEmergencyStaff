@@ -9,12 +9,12 @@ plugins {
 
 android {
     namespace = "com.example.sosstaff"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.sosstaff"
         minSdk = 27
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -83,6 +83,15 @@ dependencies {
 
     implementation("com.google.dagger:hilt-android:2.44.2")
     kapt("com.google.dagger:hilt-android-compiler:2.44.2")
+
+    implementation("androidx.activity:activity:1.8.2")
+    implementation("androidx.core:core:1.12.0")
+    implementation("androidx.activity:activity-ktx:1.8.2")
+    implementation("androidx.activity:activity-compose:1.8.2")
+    implementation("androidx.core:core-ktx:1.12.0")
+
+    implementation("com.google.dagger:hilt-android:2.42")
+    kapt("com.google.dagger:hilt-android-compiler:2.42")
 }
 
 kapt {

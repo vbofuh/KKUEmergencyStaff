@@ -36,4 +36,6 @@
     <color name="incident_assigned_bg">#E3F2FD</color>
     <color name="incident_in_progress_bg">#E8F5E9</color>
     <color name="incident_completed_bg">#F5F5F5</color>
+
+
 </resources>
