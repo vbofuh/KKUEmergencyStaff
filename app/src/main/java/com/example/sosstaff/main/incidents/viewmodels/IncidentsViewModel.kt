@@ -10,7 +10,7 @@ import com.example.sosstaff.models.Incident
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-@HiltViewModel
+
 class IncidentsViewModel @Inject constructor(
     private val incidentsRepository: IncidentsRepository
 ) : ViewModel() {

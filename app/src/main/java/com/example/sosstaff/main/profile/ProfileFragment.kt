@@ -16,7 +16,7 @@ import com.example.sosstaff.databinding.FragmentProfileBinding
 import com.example.sosstaff.main.profile.viewmodels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null

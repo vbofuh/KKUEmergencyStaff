@@ -17,7 +17,7 @@ import com.example.sosstaff.main.chat.viewmodels.ChatViewModel
 import com.example.sosstaff.models.ChatRoom
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class ChatListFragment : Fragment() {
 
     private var _binding: FragmentChatListBinding? = null

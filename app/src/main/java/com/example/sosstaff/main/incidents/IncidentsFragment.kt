@@ -18,7 +18,7 @@ import com.example.sosstaff.main.incidents.viewmodels.IncidentsViewModel
 import com.example.sosstaff.models.Incident
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class IncidentsFragment : Fragment() {
 
     private var _binding: FragmentIncidentsBinding? = null

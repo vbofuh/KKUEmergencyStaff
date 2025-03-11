@@ -14,16 +14,12 @@ import com.example.sosstaff.common.utils.NotificationUtils
 import com.example.sosstaff.main.chat.ChatListFragment
 import com.example.sosstaff.main.incidents.IncidentsFragment
 import com.example.sosstaff.main.profile.ProfileFragment
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
-@AndroidEntryPoint
 class MainContainer : AppCompatActivity() {
 
     private lateinit var bottomNavigation: BottomNavigationView
     private var chatBadge: BadgeDrawable? = null
 
-    @Inject
     lateinit var authRepository: AuthRepository
 
     // เก็บ Fragment ไว้ใช้ซ้ำ

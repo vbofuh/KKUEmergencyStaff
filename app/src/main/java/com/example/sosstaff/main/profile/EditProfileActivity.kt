@@ -9,7 +9,7 @@ import com.example.sosstaff.databinding.ActivityEditProfileBinding
 import com.example.sosstaff.main.profile.viewmodels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class EditProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditProfileBinding

@@ -17,9 +17,7 @@ import com.example.sosstaff.databinding.ActivityIncidentDetailBinding
 import com.example.sosstaff.main.chat.ChatActivity
 import com.example.sosstaff.main.incidents.viewmodels.IncidentsViewModel
 import com.example.sosstaff.models.Incident
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class IncidentDetailActivity : AppCompatActivity() {
 
     companion object {

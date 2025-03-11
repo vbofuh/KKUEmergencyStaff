@@ -11,9 +11,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.example.sosstaff.databinding.ActivityChatBinding
 import com.example.sosstaff.main.chat.adapters.MessageAdapter
 import com.example.sosstaff.main.chat.viewmodels.ChatViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class ChatActivity : AppCompatActivity() {
 
     companion object {
