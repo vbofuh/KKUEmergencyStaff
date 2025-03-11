@@ -29,4 +29,6 @@
     <color name="light_gray">#E0E0E0</color>
     <color name="medium_gray">#9E9E9E</color>
     <color name="dark_gray">#757575</color>
+
+    <color name="purple_500">#FF6200EE</color>
 </resources>
