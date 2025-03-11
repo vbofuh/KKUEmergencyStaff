@@ -100,3 +100,4 @@ class IncidentsViewModel @Inject constructor(
     fun getIncidentById(incidentId: String): LiveData<Incident?> {
         return incidentsRepository.getIncidentById(incidentId)
     }
+}

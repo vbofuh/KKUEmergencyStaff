@@ -71,6 +71,7 @@ class MainContainer : AppCompatActivity() {
                 }
                 startActivity(detailIntent)
             }
+
             chatId != null -> {
                 // เปิดห้องแชท
                 val chatIntent = Intent(this, ChatListFragment::class.java).apply {
@@ -126,3 +127,4 @@ class MainContainer : AppCompatActivity() {
             }
         }
     }
+}

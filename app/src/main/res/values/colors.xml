@@ -31,4 +31,9 @@
     <color name="dark_gray">#757575</color>
 
     <color name="purple_500">#FF6200EE</color>
+
+    <color name="incident_waiting_bg">#FFF3E0</color>
+    <color name="incident_assigned_bg">#E3F2FD</color>
+    <color name="incident_in_progress_bg">#E8F5E9</color>
+    <color name="incident_completed_bg">#F5F5F5</color>
 </resources>
