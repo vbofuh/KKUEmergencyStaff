@@ -1,51 +1,49 @@
-// พาธ: com.kku.emergencystaff/models/ChatRoom.kt
+// app/src/main/java/com/example/sosstaff/models/ChatRoom.kt
+
 package com.example.sosstaff.models
 
 import com.google.firebase.firestore.DocumentId
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 data class ChatRoom(
     @DocumentId
-    val id: String = "", // ใช้ incidentId เป็น id ของห้องแชท
+    val id: String = "", // Use incidentId as chat room id
     val incidentId: String = "",
-    val incidentType: String = "", // ประเภทเหตุการณ์
-    val userId: String = "", // ID ของผู้แจ้งเหตุ
-    val userName: String = "", // ชื่อผู้แจ้งเหตุ
-    val staffId: String = "", // ID ของเจ้าหน้าที่
-    val staffName: String = "", // ชื่อเจ้าหน้าที่
+    val incidentType: String = "",
+    val userId: String = "", // Reporter's ID
+    val userName: String = "", // Reporter's name
+    val staffId: String = "", // Staff's ID
+    val staffName: String = "", // Staff's name
     val lastMessage: String = "",
-    val lastMessageTime: Date = Date(),
+    val lastMessageTime: Long = System.currentTimeMillis(),
     val staffUnreadCount: Int = 0,
     val userUnreadCount: Int = 0,
-    val active: Boolean = true // ห้องแชทยังใช้งานได้หรือไม่
+    val active: Boolean = true // Whether the chat room is still active (incident not completed)
 ) {
-    // เมธอดสำหรับตรวจสอบว่าห้องแชทนี้มีเจ้าหน้าที่รับผิดชอบแล้วหรือยัง
+    // Method to check if this chat room has a staff assigned
     fun hasStaff(): Boolean {
         return staffId.isNotEmpty()
     }
 
-    // เมธอดสำหรับตรวจสอบว่าห้องแชทนี้มีข้อความที่ยังไม่ได้อ่านหรือไม่ (สำหรับเจ้าหน้าที่)
+    // Method to check if there are unread messages (for staff)
     fun hasUnreadMessages(): Boolean {
         return staffUnreadCount > 0
     }
 
-    // เมธอดสำหรับจัดรูปแบบเวลาข้อความล่าสุด
+    // Method for formatted last message time
     fun getFormattedLastMessageTime(): String {
-        // สร้างรูปแบบเวลาที่เหมาะสม (อาจใช้ DateUtils จากโค้ดก่อนหน้า)
-        return com.example.sosstaff.common.utils.DateUtils.getRelativeTimeSpan(lastMessageTime.time)
+        val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        return dateFormat.format(Date(lastMessageTime))
     }
 
-    // เมธอดสำหรับตรวจสอบว่าข้อความล่าสุดส่งโดยเจ้าหน้าที่คนนี้หรือไม่
-    fun isLastMessageFromCurrentStaff(currentStaffId: String): Boolean {
-        return staffId == currentStaffId && staffId.isNotEmpty()
-    }
-
-    // เมธอดสำหรับแปลงสถานะการใช้งานเป็นข้อความ
+    // Method to get status text
     fun getStatusText(): String {
         return if (active) "กำลังสนทนา" else "สิ้นสุดการสนทนา"
     }
 
-    // เมธอดสำหรับแปลงสถานะการใช้งานเป็นรหัสสี
+    // Method to get status color
     fun getStatusColor(): Int {
         return if (active) 0xFF4CAF50.toInt() else 0xFF9E9E9E.toInt()
     }

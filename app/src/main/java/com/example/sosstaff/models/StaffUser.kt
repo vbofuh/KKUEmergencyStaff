@@ -1,4 +1,5 @@
-// พาธ: com.kku.emergencystaff/models/StaffUser.kt
+// app/src/main/java/com/example/sosstaff/models/StaffUser.kt
+
 package com.example.sosstaff.models
 
 import com.google.firebase.firestore.DocumentId
@@ -12,27 +13,22 @@ data class StaffUser(
     val phone: String = "",
     val position: String = "", // ตำแหน่ง (เช่น เจ้าหน้าที่ความปลอดภัย, พยาบาล)
     val status: String = "ว่าง", // ว่าง, กำลังทำงาน
-    val imageUrl: String = "",
     val fcmToken: String = "",
     val lastActiveAt: Date = Date(),
     val createdAt: Date = Date()
 ) {
-    // เมธอดสำหรับตรวจสอบว่าเจ้าหน้าที่พร้อมรับเหตุการณ์ใหม่หรือไม่
+    // Method to check if staff is available
     fun isAvailable(): Boolean {
         return status == "ว่าง"
     }
 
-    // เมธอดสำหรับตรวจสอบว่าเจ้าหน้าที่ออนไลน์อยู่หรือไม่ (ออนไลน์ภายใน 15 นาทีล่าสุด)
+    // Method to check if staff is online (active in last 15 minutes)
     fun isOnline(): Boolean {
         val fifteenMinutesAgo = Date(System.currentTimeMillis() - 15 * 60 * 1000)
         return lastActiveAt.after(fifteenMinutesAgo)
     }
 
-    // เมธอดสำหรับแสดงชื่อเต็ม (ใช้ในกรณีที่ชื่อมี format เป็น "ชื่อ นามสกุล")
-    fun getFirstName(): String {
-        return name.split(" ").firstOrNull() ?: ""
-    }
-
+    // Method to get status text
     fun getStatusText(): String {
         return when {
             !isOnline() -> "ออฟไลน์"
@@ -41,11 +37,12 @@ data class StaffUser(
         }
     }
 
+    // Method to get status color
     fun getStatusColor(): Int {
         return when {
-            !isOnline() -> 0xFF9E9E9E.toInt() // สีเทา
-            status == "ว่าง" -> 0xFF4CAF50.toInt() // สีเขียว
-            else -> 0xFF2196F3.toInt() // สีฟ้า
+            !isOnline() -> 0xFF9E9E9E.toInt() // Gray
+            status == "ว่าง" -> 0xFF4CAF50.toInt() // Green
+            else -> 0xFF2196F3.toInt() // Blue
         }
     }
 }

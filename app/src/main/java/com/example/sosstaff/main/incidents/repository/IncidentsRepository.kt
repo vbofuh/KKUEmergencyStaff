@@ -1,4 +1,5 @@
-// พาธ: com.kku.emergencystaff/main/incidents/repository/IncidentsRepository.kt
+// app/src/main/java/com/example/sosstaff/main/incidents/repository/IncidentsRepository.kt
+
 package com.example.sosstaff.main.incidents.repository
 
 import androidx.lifecycle.LiveData
@@ -12,16 +13,15 @@ import java.util.Date
 class IncidentsRepository {
     private val firestore = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
-    private val incidentsCollection = db.collection("incidents")
+    private val incidentsCollection = "incidents"
     private val chatCollection = "chats"
 
-    // ดึงรายการเหตุการณ์ทั้งหมดที่ยังไม่เสร็จสิ้น
-    fun getActiveIncidents(): LiveData<List<Incident>> {
+    // Fix for getUnassignedIncidents - undefined db variable in original code
+    fun getUnassignedIncidents(): LiveData<List<Incident>> {
         val incidentsLiveData = MutableLiveData<List<Incident>>()
 
         firestore.collection(incidentsCollection)
-            .whereNotEqualTo("status", "เสร็จสิ้น")
-            .orderBy("status")
+            .whereEqualTo("assignedStaffId", "")
             .orderBy("reportedAt", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
@@ -31,13 +31,38 @@ class IncidentsRepository {
                 if (snapshot != null) {
                     val incidents = snapshot.toObjects(Incident::class.java)
                     incidentsLiveData.value = incidents
+                } else {
+                    incidentsLiveData.value = emptyList()
                 }
             }
 
         return incidentsLiveData
     }
 
-    // ดึงรายการเหตุการณ์ที่เสร็จสิ้นแล้ว
+    fun getActiveIncidents(): LiveData<List<Incident>> {
+        val incidentsLiveData = MutableLiveData<List<Incident>>()
+
+        firestore.collection(incidentsCollection)
+            .whereNotEqualTo("status", "เสร็จสิ้น")
+            .orderBy("status")
+            .orderBy("reportedAt", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    incidentsLiveData.value = emptyList()
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null) {
+                    val incidents = snapshot.toObjects(Incident::class.java)
+                    incidentsLiveData.value = incidents
+                } else {
+                    incidentsLiveData.value = emptyList()
+                }
+            }
+
+        return incidentsLiveData
+    }
+
     fun getCompletedIncidents(): LiveData<List<Incident>> {
         val incidentsLiveData = MutableLiveData<List<Incident>>()
 
@@ -46,19 +71,21 @@ class IncidentsRepository {
             .orderBy("completedAt", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
+                    incidentsLiveData.value = emptyList()
                     return@addSnapshotListener
                 }
 
                 if (snapshot != null) {
                     val incidents = snapshot.toObjects(Incident::class.java)
                     incidentsLiveData.value = incidents
+                } else {
+                    incidentsLiveData.value = emptyList()
                 }
             }
 
         return incidentsLiveData
     }
 
-    // ดึงรายละเอียดของเหตุการณ์ตาม ID
     fun getIncidentById(incidentId: String): LiveData<Incident?> {
         val incidentLiveData = MutableLiveData<Incident?>()
 
@@ -66,6 +93,7 @@ class IncidentsRepository {
             .document(incidentId)
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
+                    incidentLiveData.value = null
                     return@addSnapshotListener
                 }
 
@@ -80,7 +108,6 @@ class IncidentsRepository {
         return incidentLiveData
     }
 
-    // อัปเดตสถานะของเหตุการณ์
     fun updateIncidentStatus(incidentId: String, newStatus: String): LiveData<Boolean> {
         val resultLiveData = MutableLiveData<Boolean>()
         val currentUser = auth.currentUser
@@ -101,9 +128,9 @@ class IncidentsRepository {
                 .update("active", false)
         }
 
-        // ถ้าเปลี่ยนเป็นเจ้าหน้าที่รับเรื่องแล้ว และยังไม่มีเจ้าหน้าที่รับผิดชอบ ให้กำหนดเจ้าหน้าที่
+        // If changing to "เจ้าหน้าที่รับเรื่องแล้ว" and no staff assigned, assign current staff
         if (newStatus == "เจ้าหน้าที่รับเรื่องแล้ว") {
-            // ตรวจสอบเจ้าหน้าที่ปัจจุบัน
+            // Check current incident
             firestore.collection(incidentsCollection)
                 .document(incidentId)
                 .get()
@@ -112,7 +139,7 @@ class IncidentsRepository {
                         val incident = document.toObject(Incident::class.java)
 
                         if (incident != null && incident.assignedStaffId.isEmpty()) {
-                            // ดึงข้อมูลเจ้าหน้าที่ปัจจุบัน
+                            // Get current staff info
                             firestore.collection("staff")
                                 .document(currentUser.uid)
                                 .get()
@@ -123,7 +150,7 @@ class IncidentsRepository {
                                         updates["assignedStaffId"] = currentUser.uid
                                         updates["assignedStaffName"] = staffName
 
-                                        // อัปเดตข้อมูลในห้องแชทด้วย
+                                        // Also update chat room
                                         firestore.collection(chatCollection)
                                             .document(incidentId)
                                             .update(
@@ -134,17 +161,17 @@ class IncidentsRepository {
                                             )
                                     }
 
-                                    // ทำการอัปเดตสถานะ
+                                    // Update status
                                     updateIncidentDoc(incidentId, updates, resultLiveData)
                                 }
                         } else {
-                            // ทำการอัปเดตสถานะ
+                            // Update status
                             updateIncidentDoc(incidentId, updates, resultLiveData)
                         }
                     }
                 }
         } else {
-            // ทำการอัปเดตสถานะ
+            // Update status
             updateIncidentDoc(incidentId, updates, resultLiveData)
         }
 
@@ -163,19 +190,18 @@ class IncidentsRepository {
             }
     }
 
-    // ค้นหาเหตุการณ์
     fun searchIncidents(query: String): LiveData<List<Incident>> {
         val incidentsLiveData = MutableLiveData<List<Incident>>()
 
-        // เนื่องจาก Firestore ไม่รองรับการค้นหาข้อความแบบ full-text ตรงๆ
-        // เราจะดึงข้อมูลทั้งหมดมาก่อนแล้วกรองในแอป
+        // Since Firestore doesn't support direct full-text search
+        // we'll fetch all incidents and filter in the app
         firestore.collection(incidentsCollection)
             .orderBy("reportedAt", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
                 val allIncidents = documents.toObjects(Incident::class.java)
 
-                // กรองเหตุการณ์ตามข้อความค้นหา
+                // Filter incidents by search query
                 val filteredIncidents = allIncidents.filter { incident ->
                     incident.incidentType.contains(query, ignoreCase = true) ||
                             incident.location.contains(query, ignoreCase = true) ||
@@ -192,10 +218,5 @@ class IncidentsRepository {
         return incidentsLiveData
     }
 
-    fun getUnassignedIncidents(): LiveData<List<Incident>> {
-        return incidentsCollection
-            .whereEqualTo("staffId", "") // เฉพาะเหตุการณ์ที่ยังไม่มีเจ้าหน้าที่
-            .orderBy("reportedAt")
-            .getLiveData()
-    }
+
 }

@@ -1,4 +1,4 @@
-// พาธ: com.kku.emergencystaff/main/chat/viewmodels/ChatViewModel.kt
+// com.kku.emergencystaff/main/chat/viewmodels/ChatViewModel.kt
 package com.example.sosstaff.main.chat.viewmodels
 
 import androidx.lifecycle.LiveData
@@ -17,29 +17,29 @@ class ChatViewModel(
     private val _selectedChatId = MutableLiveData<String>()
     val selectedChatId: LiveData<String> get() = _selectedChatId
 
-    // LiveData สำหรับห้องแชทที่เจ้าหน้าที่รับผิดชอบ
-    val assignedChatRooms: LiveData<List<ChatRoom>> get() = chatRepository.getChatRooms()
+    // LiveData for assigned chat rooms
+    val assignedChatRooms: LiveData<List<ChatRoom>> = chatRepository.getAssignedChatRooms()
 
-    // LiveData สำหรับห้องแชทที่ยังไม่มีเจ้าหน้าที่รับผิดชอบ
-    val unassignedChatRooms: LiveData<List<ChatRoom>> get() = chatRepository.getUnassignedChatRooms()
+    // LiveData for unassigned chat rooms
+    val unassignedChatRooms: LiveData<List<ChatRoom>> = chatRepository.getUnassignedChatRooms()
 
-    // LiveData สำหรับการกรองสถานะห้องแชท
+    // LiveData for chat room filter status
     private val _chatFilter = MutableLiveData<ChatFilter>(ChatFilter.ALL)
     val chatFilter: LiveData<ChatFilter> get() = _chatFilter
 
-    // LiveData สำหรับห้องแชทที่กรองแล้ว
+    // LiveData for filtered chat rooms
     private val _filteredChatRooms = MediatorLiveData<List<ChatRoom>>()
     val filteredChatRooms: LiveData<List<ChatRoom>> get() = _filteredChatRooms
 
-    // LiveData สำหรับจำนวนข้อความที่ยังไม่ได้อ่าน
+    // LiveData for total unread count
     private val _totalUnreadCount = MediatorLiveData<Int>()
     val totalUnreadCount: LiveData<Int> get() = _totalUnreadCount
 
-    // ข้อความในห้องแชทที่เลือก
+    // Messages in selected chat
     private val _currentChatMessages = MutableLiveData<List<Message>>()
     val currentChatMessages: LiveData<List<Message>> get() = _currentChatMessages
 
-    // ห้องแชทที่เลือกในปัจจุบัน
+    // Current selected chat room
     private val _currentChatRoom = MutableLiveData<ChatRoom?>()
     val currentChatRoom: LiveData<ChatRoom?> get() = _currentChatRoom
 
@@ -49,12 +49,12 @@ class ChatViewModel(
     }
 
     private fun setupFilteredChatRooms() {
-        // ติดตามการเปลี่ยนแปลงของห้องแชทที่รับผิดชอบ
+        // Track changes in assigned chat rooms
         _filteredChatRooms.addSource(assignedChatRooms) { chatRooms ->
             updateFilteredChatRooms(chatRooms)
         }
 
-        // ติดตามการเปลี่ยนแปลงของการกรอง
+        // Track changes in filter
         _filteredChatRooms.addSource(_chatFilter) { filter ->
             val currentChatRooms = assignedChatRooms.value ?: emptyList()
             updateFilteredChatRooms(currentChatRooms)
@@ -78,59 +78,61 @@ class ChatViewModel(
         }
     }
 
-    // เปลี่ยนตัวกรองห้องแชท
+    // Change chat filter
     fun setChatFilter(filter: ChatFilter) {
         _chatFilter.value = filter
     }
 
-    // เลือกห้องแชท
+    // Select chat room
     fun selectChatRoom(chatId: String) {
         _selectedChatId.value = chatId
 
-        // ดึงข้อมูลห้องแชท
+        // Get chat room data
         val chatRoomLiveData = chatRepository.getChatRoomById(chatId)
 
-        // สังเกตการณ์ห้องแชทที่เลือก
+        // Observe selected chat room
         chatRoomLiveData.observeForever { chatRoom ->
             _currentChatRoom.value = chatRoom
         }
 
-        // ดึงข้อความในห้องแชท
-        val messagesLiveData = chatRepository.getMessages(chatId)
+        // Get messages in chat room
+        val messagesLiveData = chatRepository.getChatMessages(chatId)
 
-        // สังเกตการณ์ข้อความในห้องแชท
+        // Observe messages in chat room
         messagesLiveData.observeForever { messages ->
             _currentChatMessages.value = messages
         }
     }
 
-    // ส่งข้อความใหม่
+    // Send new message
     fun sendMessage(chatId: String, message: String): LiveData<Boolean> {
         return chatRepository.sendMessage(chatId, message)
     }
 
-    // รับห้องแชทที่ยังไม่มีเจ้าหน้าที่
+    // Assign unassigned chat room
     fun assignChatRoom(chatId: String): LiveData<Boolean> {
         return chatRepository.assignChatRoom(chatId)
     }
 
-    // เช็คว่าข้อความนี้เป็นของเจ้าหน้าที่คนปัจจุบันหรือไม่
+    // Check if message is from current staff
     fun isMessageFromCurrentStaff(message: Message): Boolean {
         val currentUser = FirebaseAuth.getInstance().currentUser
         return currentUser != null && message.senderId == currentUser.uid
     }
 
-    // เช็คว่าห้องแชทนี้มีข้อความที่ยังไม่ได้อ่านหรือไม่
+    // Check if chat room has unread messages
     fun hasUnreadMessages(chatRoom: ChatRoom): Boolean {
         return chatRoom.staffUnreadCount > 0
     }
 
-    // ประเภทตัวกรองห้องแชท
+    // Chat filter types
     enum class ChatFilter {
-        ALL,        // ทั้งหมด
-        ACTIVE,     // ใช้งานอยู่
-        COMPLETED   // เสร็จสิ้นแล้ว
+        ALL,        // All
+        ACTIVE,     // Active
+        COMPLETED   // Completed
     }
+
+    // Mark messages as read
     fun markMessagesAsRead(chatId: String) {
         chatRepository.markMessagesAsRead(chatId)
     }

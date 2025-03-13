@@ -1,3 +1,5 @@
+// app/src/main/java/com/example/sosstaff/service/MyFirebaseMessagingService.kt
+
 package com.example.sosstaff.service
 
 import android.app.NotificationChannel
@@ -28,8 +30,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d(TAG, "From: ${remoteMessage.from}")
 
-        // ตรวจสอบว่ามีข้อมูลหรือไม่
-        remoteMessage.data.isNotEmpty().let {
+        // Check if message contains data
+        if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
 
             val type = remoteMessage.data["type"]
@@ -67,13 +69,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     }
                 }
                 else -> {
-                    // กรณีการแจ้งเตือนทั่วไป
+                    // Generic notification case
                     showNotification(title, message)
                 }
             }
         }
 
-        // ตรวจสอบว่ามีการแจ้งเตือนหรือไม่
+        // Check if message contains notification payload
         remoteMessage.notification?.let {
             Log.d(TAG, "Message Notification Body: ${it.body}")
             showNotification(it.title, it.body)
@@ -83,7 +85,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         Log.d(TAG, "Refreshed token: $token")
 
-        // ถ้ามีการล็อกอินอยู่ ให้อัปเดต FCM Token
+        // If user is logged in, update FCM token
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
             val userId = currentUser.uid
@@ -143,7 +145,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        // Android Oreo หรือใหม่กว่าต้องมีการสร้าง notification channel
+        // For Android Oreo and above, create notification channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = when (type) {
                 NotificationType.INCIDENT -> NotificationChannel(

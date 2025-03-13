@@ -1,9 +1,11 @@
-// พาธ: com.kku.emergencystaff/models/Incident.kt
+// app/src/main/java/com/example/sosstaff/models/Incident.kt
+
 package com.example.sosstaff.models
 
 import com.google.firebase.firestore.DocumentId
-import com.google.firebase.firestore.GeoPoint
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 data class Incident(
     @DocumentId
@@ -13,42 +15,34 @@ data class Incident(
     val reporterPhone: String = "",
     val incidentType: String = "", // อุบัติเหตุบนถนน, จับสัตว์, ทะเลาะวิวาท, etc.
     val location: String = "",
-    val locationLatLng: GeoPoint? = null,
     val relationToVictim: String = "", // ผู้ประสบเหตุ, ผู้เห็นเหตุการณ์, เพื่อนผู้ประสบเหตุ
     val additionalInfo: String = "",
     val status: String = "รอรับเรื่อง", // รอรับเรื่อง, เจ้าหน้าที่รับเรื่องแล้ว, กำลังดำเนินการ, เสร็จสิ้น
     val assignedStaffId: String = "",
     val assignedStaffName: String = "",
-    val reportedAt: Date = Date(),
-    val lastUpdatedAt: Date = Date(),
-    val completedAt: Date? = null
+    val reportedAt: Long = System.currentTimeMillis(),
+    val lastUpdatedAt: Long = System.currentTimeMillis(),
+    val completedAt: Long? = null
 ) {
-    // เมธอดสำหรับตรวจสอบว่าเหตุการณ์ยังดำเนินการอยู่หรือไม่
+    // Method to check if the incident is still active
     fun isActive(): Boolean {
         return status != "เสร็จสิ้น"
     }
 
-    // เมธอดสำหรับตรวจสอบว่าเหตุการณ์นี้รับเรื่องแล้วหรือยัง
-    fun isAssigned(): Boolean {
-        return assignedStaffId.isNotEmpty()
+    // Method to format report time for display
+    fun getFormattedReportTime(): String {
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+        return dateFormat.format(Date(reportedAt))
     }
 
-    // เมธอดสำหรับคำนวณระยะเวลาดำเนินการ
-    fun getDuration(): Long {
-        return when {
-            completedAt != null -> completedAt.time - reportedAt.time
-            else -> System.currentTimeMillis() - reportedAt.time
-        }
-    }
-
-    // แปลงสถานะเป็นรหัสสี
+    // Method to determine status color
     fun getStatusColor(): Int {
         return when (status) {
-            "รอรับเรื่อง" -> 0xFFFF9800.toInt() // สีส้ม
-            "เจ้าหน้าที่รับเรื่องแล้ว" -> 0xFF2196F3.toInt() // สีฟ้า
-            "กำลังดำเนินการ" -> 0xFF4CAF50.toInt() // สีเขียว
-            "เสร็จสิ้น" -> 0xFF9E9E9E.toInt() // สีเทา
-            else -> 0xFF000000.toInt() // สีดำ
+            "รอรับเรื่อง" -> 0xFFFF9800.toInt() // Orange
+            "เจ้าหน้าที่รับเรื่องแล้ว" -> 0xFF2196F3.toInt() // Blue
+            "กำลังดำเนินการ" -> 0xFF4CAF50.toInt() // Green
+            "เสร็จสิ้น" -> 0xFF9E9E9E.toInt() // Gray
+            else -> 0xFF000000.toInt() // Black
         }
     }
 }

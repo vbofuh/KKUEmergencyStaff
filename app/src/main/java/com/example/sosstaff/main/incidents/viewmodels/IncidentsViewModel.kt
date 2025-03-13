@@ -1,4 +1,4 @@
-// พาธ: com.kku.emergencystaff/main/incidents/viewmodels/IncidentsViewModel.kt
+// com.kku.emergencystaff/main/incidents/viewmodels/IncidentsViewModel.kt
 package com.example.sosstaff.main.incidents.viewmodels
 
 import androidx.lifecycle.LiveData
@@ -12,20 +12,20 @@ class IncidentsViewModel(
     private val incidentsRepository: IncidentsRepository
 ) : ViewModel() {
 
-    // LiveData สำหรับเหตุการณ์ที่กำลังดำเนินการ
-    val activeIncidents: LiveData<List<Incident>> get() = incidentsRepository.getActiveIncidents()
+    // LiveData for active incidents
+    val activeIncidents: LiveData<List<Incident>> = incidentsRepository.getActiveIncidents()
 
-    // LiveData สำหรับเหตุการณ์ที่เสร็จสิ้นแล้ว
-    val completedIncidents: LiveData<List<Incident>> get() = incidentsRepository.getCompletedIncidents()
+    // LiveData for completed incidents
+    val completedIncidents: LiveData<List<Incident>> = incidentsRepository.getCompletedIncidents()
 
-    // LiveData สำหรับผลการค้นหา
+    // LiveData for search results
     private val _searchResults = MutableLiveData<List<Incident>>()
     val searchResults: LiveData<List<Incident>> get() = _searchResults
 
-    // LiveData สำหรับการกรองประเภทเหตุการณ์
+    // LiveData for incident type filter
     private val _filteredByType = MutableLiveData<String?>(null)
 
-    // LiveData ที่รวมผลการกรองและการค้นหา
+    // LiveData that combines filtering and searching
     private val _filteredActiveIncidents = MediatorLiveData<List<Incident>>()
     val filteredActiveIncidents: LiveData<List<Incident>> get() = _filteredActiveIncidents
 
@@ -37,30 +37,30 @@ class IncidentsViewModel(
     }
 
     private fun setupFilteredIncidents() {
-        // ติดตามการเปลี่ยนแปลงของเหตุการณ์ที่กำลังดำเนินการ
+        // Track changes in active incidents
         _filteredActiveIncidents.addSource(activeIncidents) { incidents ->
             _filteredActiveIncidents.value = applyFilters(incidents)
         }
 
-        // ติดตามการเปลี่ยนแปลงของการกรอง
+        // Track changes in filter
         _filteredActiveIncidents.addSource(_filteredByType) { type ->
             val currentIncidents = activeIncidents.value ?: emptyList()
             _filteredActiveIncidents.value = applyFilters(currentIncidents)
         }
 
-        // ติดตามการเปลี่ยนแปลงของเหตุการณ์ที่เสร็จสิ้นแล้ว
+        // Track changes in completed incidents
         _filteredCompletedIncidents.addSource(completedIncidents) { incidents ->
             _filteredCompletedIncidents.value = applyFilters(incidents)
         }
 
-        // ติดตามการเปลี่ยนแปลงของการกรอง
+        // Track changes in filter for completed incidents
         _filteredCompletedIncidents.addSource(_filteredByType) { type ->
             val currentIncidents = completedIncidents.value ?: emptyList()
             _filteredCompletedIncidents.value = applyFilters(currentIncidents)
         }
     }
 
-    // กรองเหตุการณ์ตามประเภท
+    // Filter incidents by type
     private fun applyFilters(incidents: List<Incident>): List<Incident> {
         val incidentType = _filteredByType.value
 
@@ -71,12 +71,12 @@ class IncidentsViewModel(
         }
     }
 
-    // กำหนดประเภทเหตุการณ์ที่ต้องการกรอง
+    // Set incident type filter
     fun filterByType(incidentType: String?) {
         _filteredByType.value = incidentType
     }
 
-    // ค้นหาเหตุการณ์
+    // Search incidents
     fun searchIncidents(query: String) {
         if (query.isBlank()) {
             _searchResults.value = emptyList()
@@ -88,16 +88,17 @@ class IncidentsViewModel(
         }
     }
 
-    // อัปเดตสถานะของเหตุการณ์
+    // Update incident status
     fun updateIncidentStatus(incidentId: String, newStatus: String): LiveData<Boolean> {
         return incidentsRepository.updateIncidentStatus(incidentId, newStatus)
     }
 
-    // ดึงรายละเอียดของเหตุการณ์ตาม ID
+    // Get incident by ID
     fun getIncidentById(incidentId: String): LiveData<Incident?> {
         return incidentsRepository.getIncidentById(incidentId)
     }
 
+    // Load unassigned incidents
     fun loadUnassignedIncidents(): LiveData<List<Incident>> {
         return incidentsRepository.getUnassignedIncidents()
     }
