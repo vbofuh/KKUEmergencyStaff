@@ -159,4 +159,4 @@ class ChatListFragment : Fragment() {
     }
 
     private fun onChatRoomSelected(chatId: String) {
-        val intent = Intent(requireContext(), ChatActivity::class.java).apply {git
+        val intent = Intent(requireContext(), ChatActivity::class.java).apply {
