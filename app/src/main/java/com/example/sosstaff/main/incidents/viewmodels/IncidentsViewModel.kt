@@ -7,10 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sosstaff.main.incidents.repository.IncidentsRepository
 import com.example.sosstaff.models.Incident
-import javax.inject.Inject
 
-
-class IncidentsViewModel @Inject constructor(
+class IncidentsViewModel(
     private val incidentsRepository: IncidentsRepository
 ) : ViewModel() {
 

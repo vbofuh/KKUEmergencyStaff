@@ -9,10 +9,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.example.sosstaff.main.chat.repository.ChatRepository
 import com.example.sosstaff.models.ChatRoom
 import com.example.sosstaff.models.Message
-import javax.inject.Inject
 
-
-class ChatViewModel @Inject constructor(
+class ChatViewModel(
     private val chatRepository: ChatRepository
 ) : ViewModel() {
 

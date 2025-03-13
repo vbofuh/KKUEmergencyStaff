@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.example.sosstaff.databinding.FragmentChatListBinding
@@ -15,14 +14,15 @@ import com.example.sosstaff.main.MainContainer
 import com.example.sosstaff.main.chat.adapters.ChatRoomAdapter
 import com.example.sosstaff.main.chat.viewmodels.ChatViewModel
 import com.example.sosstaff.models.ChatRoom
-
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatListFragment : Fragment() {
 
     private var _binding: FragmentChatListBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ChatViewModel by viewModels()
+    // ใช้ Koin เพื่อฉีด viewModel
+    private val viewModel: ChatViewModel by viewModel()
     private lateinit var chatRoomAdapter: ChatRoomAdapter
     private lateinit var unassignedChatRoomAdapter: ChatRoomAdapter
 
@@ -159,42 +159,4 @@ class ChatListFragment : Fragment() {
     }
 
     private fun onChatRoomSelected(chatId: String) {
-        val intent = Intent(requireContext(), ChatActivity::class.java).apply {
-            putExtra(ChatActivity.EXTRA_CHAT_ID, chatId)
-        }
-        startActivity(intent)
-    }
-
-    private fun showAssignChatRoomDialog(chatRoom: ChatRoom) {
-        val dialog = com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
-            .setTitle("รับเรื่องใหม่")
-            .setMessage("คุณต้องการรับเรื่อง \"${chatRoom.incidentType}\" จากคุณ ${chatRoom.userName} ใช่หรือไม่?")
-            .setPositiveButton("รับเรื่อง") { _, _ ->
-                assignChatRoom(chatRoom.id)
-            }
-            .setNegativeButton("ยกเลิก", null)
-            .create()
-
-        dialog.show()
-    }
-
-    private fun assignChatRoom(chatId: String) {
-        viewModel.assignChatRoom(chatId).observe(viewLifecycleOwner) { success ->
-            if (success) {
-                // เปิดห้องแชทที่รับเรื่องใหม่
-                onChatRoomSelected(chatId)
-            } else {
-                com.google.android.material.snackbar.Snackbar.make(
-                    binding.root,
-                    "ไม่สามารถรับเรื่องได้",
-                    com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
-                ).show()
-            }
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-}
+        val intent = Intent(requireContext(), ChatActivity::class.java).apply {git

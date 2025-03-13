@@ -14,13 +14,15 @@ import com.example.sosstaff.common.utils.NotificationUtils
 import com.example.sosstaff.main.chat.ChatListFragment
 import com.example.sosstaff.main.incidents.IncidentsFragment
 import com.example.sosstaff.main.profile.ProfileFragment
+import org.koin.android.ext.android.inject
 
 class MainContainer : AppCompatActivity() {
 
     private lateinit var bottomNavigation: BottomNavigationView
     private var chatBadge: BadgeDrawable? = null
 
-    lateinit var authRepository: AuthRepository
+    // ใช้ Koin เพื่อฉีด authRepository แทนการประกาศแบบเดิม
+    private val authRepository: AuthRepository by inject()
 
     // เก็บ Fragment ไว้ใช้ซ้ำ
     private val incidentsFragment = IncidentsFragment()
