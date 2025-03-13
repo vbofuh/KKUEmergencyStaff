@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.example.sosstaff.R
@@ -26,6 +28,29 @@ class IncidentsFragment : Fragment() {
     private val viewModel: IncidentsViewModel by viewModel()
     private lateinit var activeIncidentsAdapter: IncidentAdapter
     private lateinit var completedIncidentsAdapter: IncidentAdapter
+
+    // เพิ่มแท็บใหม่สำหรับเหตุการณ์รอรับเรื่อง
+    val unassignedTab = binding.tabLayout.newTab().setText("รอรับเรื่อง")
+    binding.tabLayout.addTab(unassignedTab)
+
+// เพิ่มเงื่อนไขการกรองเหตุการณ์
+    when (tab?.position) {
+        0 -> filterIncidents("all")
+        1 -> filterIncidents("active")
+        2 -> filterIncidents("completed")
+        3 -> filterIncidents("unassigned")
+    }
+
+    fun filterIncidents(filter: String) {
+        val incidents = when (filter) {
+            "all" -> allIncidents
+            "active" -> activeIncidents
+            "completed" -> completedIncidents
+            "unassigned" -> unassignedIncidents
+            else -> emptyList()
+        }
+        adapter.submitList(incidents)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -175,6 +200,23 @@ class IncidentsFragment : Fragment() {
         _binding = null
     }
 
-    
+    fun assignIncident(incidentId: String): LiveData<Boolean> {
+        val resultLiveData = MutableLiveData<Boolean>()
+        val currentUser = auth.currentUser
+
+        incidentsCollection.document(incidentId)
+            .update(mapOf(
+                "staffId" to currentUser?.uid,
+                "status" to "เจ้าหน้าที่รับเรื่องแล้ว"
+            ))
+            .addOnSuccessListener {
+                resultLiveData.value = true
+            }
+            .addOnFailureListener {
+                resultLiveData.value = false
+            }
+
+        return resultLiveData
+    }
 
 }
