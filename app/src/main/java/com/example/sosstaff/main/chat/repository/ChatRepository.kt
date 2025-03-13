@@ -12,8 +12,7 @@ import java.util.Date
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
-class ChatRepository @Inject constructor() {
+class ChatRepository {
     private val firestore = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
     private val chatRoomsCollection = "chats"

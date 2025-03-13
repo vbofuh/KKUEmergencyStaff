@@ -11,8 +11,7 @@ import java.util.Date
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
-class IncidentsRepository @Inject constructor() {
+class IncidentsRepository {
     private val firestore = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
     private val incidentsCollection = "incidents"

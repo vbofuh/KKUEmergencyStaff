@@ -4,9 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.sosstaff.auth.repository.AuthRepository
 
-/**
- * คลาสแฟคทอรีสำหรับสร้าง LoginViewModel พร้อมการส่งผ่าน repository
- */
 class LoginViewModelFactory(private val repository: AuthRepository) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

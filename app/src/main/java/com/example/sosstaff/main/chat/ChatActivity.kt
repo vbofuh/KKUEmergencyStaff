@@ -21,7 +21,7 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityChatBinding
-    private val viewModel: ChatViewModel by viewModels()
+    private val viewModel: ChatViewModel by viewModel()
 
     private lateinit var messageAdapter: MessageAdapter
     private var chatId: String = ""

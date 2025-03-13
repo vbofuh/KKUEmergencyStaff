@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
@@ -14,6 +15,7 @@ import com.example.sosstaff.main.MainContainer
 import com.example.sosstaff.main.chat.adapters.ChatRoomAdapter
 import com.example.sosstaff.main.chat.viewmodels.ChatViewModel
 import com.example.sosstaff.models.ChatRoom
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatListFragment : Fragment() {
@@ -80,6 +82,7 @@ class ChatListFragment : Fragment() {
                         binding.rvUnassignedChatRooms.visibility = View.GONE
                         binding.tvUnassignedHeader.visibility = View.GONE
                     }
+
                     1 -> {
                         // แสดงห้องแชทที่กำลังใช้งาน
                         viewModel.setChatFilter(ChatViewModel.ChatFilter.ACTIVE)
@@ -87,6 +90,7 @@ class ChatListFragment : Fragment() {
                         binding.rvUnassignedChatRooms.visibility = View.GONE
                         binding.tvUnassignedHeader.visibility = View.GONE
                     }
+
                     2 -> {
                         // แสดงห้องแชทที่เสร็จสิ้นแล้ว
                         viewModel.setChatFilter(ChatViewModel.ChatFilter.COMPLETED)
@@ -94,6 +98,7 @@ class ChatListFragment : Fragment() {
                         binding.rvUnassignedChatRooms.visibility = View.GONE
                         binding.tvUnassignedHeader.visibility = View.GONE
                     }
+
                     3 -> {
                         // แสดงห้องแชทที่ยังไม่มีเจ้าหน้าที่รับผิดชอบ
                         binding.rvChatRooms.visibility = View.GONE
@@ -133,16 +138,20 @@ class ChatListFragment : Fragment() {
     }
 
     private fun updateEmptyView(isEmpty: Boolean) {
-        binding.tvEmptyChatRooms.visibility = if (isEmpty && binding.rvChatRooms.visibility == View.VISIBLE) View.VISIBLE else View.GONE
+        binding.tvEmptyChatRooms.visibility =
+            if (isEmpty && binding.rvChatRooms.visibility == View.VISIBLE) View.VISIBLE else View.GONE
     }
 
     private fun updateUnassignedEmptyView(isEmpty: Boolean) {
-        binding.tvEmptyUnassigned.visibility = if (isEmpty && binding.rvUnassignedChatRooms.visibility == View.VISIBLE) View.VISIBLE else View.GONE
+        binding.tvEmptyUnassigned.visibility =
+            if (isEmpty && binding.rvUnassignedChatRooms.visibility == View.VISIBLE) View.VISIBLE else View.GONE
     }
 
     private fun updateUnreadBadge() {
         // อัปเดตแบดจ์ในแถบนำทางด้านล่าง
-        (requireActivity() as? MainContainer)?.updateChatBadge(viewModel.totalUnreadCount.value ?: 0)
+        (requireActivity() as? MainContainer)?.updateChatBadge(
+            viewModel.totalUnreadCount.value ?: 0
+        )
     }
 
     private fun updateUnassignedBadge(count: Int) {
@@ -160,3 +169,34 @@ class ChatListFragment : Fragment() {
 
     private fun onChatRoomSelected(chatId: String) {
         val intent = Intent(requireContext(), ChatActivity::class.java).apply {
+            putExtra(ChatActivity.EXTRA_CHAT_ID, chatId)
+        }
+        startActivity(intent)
+    }
+
+    private fun showAssignChatRoomDialog(chatRoom: ChatRoom) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("รับผิดชอบห้องแชทนี้")
+            .setMessage("คุณต้องการรับผิดชอบการสนทนากับ ${chatRoom.userName} เกี่ยวกับ \"${chatRoom.incidentType}\" ใช่หรือไม่?")
+            .setPositiveButton("รับผิดชอบ") { _, _ ->
+                viewModel.assignChatRoom(chatRoom.id).observe(viewLifecycleOwner) { success ->
+                    if (success) {
+                        Toast.makeText(
+                            requireContext(),
+                            "รับผิดชอบห้องแชทสำเร็จ",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        onChatRoomSelected(chatRoom.id)
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "ไม่สามารถรับผิดชอบห้องแชทได้",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+            .setNegativeButton("ยกเลิก", null)
+            .show()
+    }
+}
