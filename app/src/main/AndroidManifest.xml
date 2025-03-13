@@ -17,12 +17,39 @@
         android:theme="@style/Theme.SOSStaff"
         tools:targetApi="31">
 
-        <!-- เพิ่ม LoginActivity -->
+        <!-- Main Activity (No longer launcher) -->
         <activity
-            android:name=".auth.LoginActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.Light" />
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SOSStaff" />
 
+
+        <!-- Main Container Activity -->
+        <activity
+            android:name=".main.MainContainer"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.SOSStaff" />
+
+        <!-- Chat Activity -->
+        <activity
+            android:name=".main.chat.ChatActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SOSStaff" />
+
+        <!-- Incident Detail Activity -->
+        <activity
+            android:name=".main.incidents.IncidentDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SOSStaff" />
+
+        <!-- Edit Profile Activity -->
+        <activity
+            android:name=".main.profile.EditProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SOSStaff" />
+
+        <!-- Firebase Messaging Service -->
         <service
             android:name=".service.MyFirebaseMessagingService"
             android:exported="false">
@@ -31,17 +58,17 @@
             </intent-filter>
         </service>
 
+        <!-- Login Activity (Launcher) -->
         <activity
-            android:name=".MainActivity"
+            android:name=".auth.LoginActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.SOSStaff">
+            android:theme="@style/Theme.MaterialComponents.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
