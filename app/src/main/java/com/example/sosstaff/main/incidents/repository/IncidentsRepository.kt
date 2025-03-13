@@ -12,7 +12,7 @@ import java.util.Date
 class IncidentsRepository {
     private val firestore = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
-    private val incidentsCollection = "incidents"
+    private val incidentsCollection = db.collection("incidents")
     private val chatCollection = "chats"
 
     // ดึงรายการเหตุการณ์ทั้งหมดที่ยังไม่เสร็จสิ้น
@@ -194,5 +194,12 @@ class IncidentsRepository {
             }
 
         return incidentsLiveData
+    }
+
+    fun getUnassignedIncidents(): LiveData<List<Incident>> {
+        return incidentsCollection
+            .whereEqualTo("staffId", "") // เฉพาะเหตุการณ์ที่ยังไม่มีเจ้าหน้าที่
+            .orderBy("reportedAt")
+            .getLiveData()
     }
 }

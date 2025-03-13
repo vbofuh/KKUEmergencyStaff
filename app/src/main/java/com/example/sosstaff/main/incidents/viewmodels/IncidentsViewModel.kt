@@ -97,4 +97,8 @@ class IncidentsViewModel(
     fun getIncidentById(incidentId: String): LiveData<Incident?> {
         return incidentsRepository.getIncidentById(incidentId)
     }
+
+    fun loadUnassignedIncidents(): LiveData<List<Incident>> {
+        return incidentsRepository.getUnassignedIncidents()
+    }
 }
