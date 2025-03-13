@@ -25,7 +25,7 @@ class ChatListFragment : Fragment() {
     private val binding get() = _binding!!
 
     // ใช้ Koin เพื่อฉีด viewModel
-    private val viewModel: ChatViewModel by view
+    private val viewModel: ChatViewModel by viewModel()
     private lateinit var chatRoomAdapter: ChatRoomAdapter
     private lateinit var unassignedChatRoomAdapter: ChatRoomAdapter
 

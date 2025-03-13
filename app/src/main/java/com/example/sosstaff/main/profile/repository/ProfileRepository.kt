@@ -7,8 +7,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.sosstaff.models.StaffUser
 import java.util.Date
-import javax.inject.Inject
-import javax.inject.Singleton
 
 class ProfileRepository {
     private val firestore = FirebaseFirestore.getInstance()

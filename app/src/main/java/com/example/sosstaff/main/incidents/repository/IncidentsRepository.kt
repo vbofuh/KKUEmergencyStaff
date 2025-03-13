@@ -8,8 +8,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.example.sosstaff.models.Incident
 import java.util.Date
-import javax.inject.Inject
-import javax.inject.Singleton
 
 class IncidentsRepository {
     private val firestore = FirebaseFirestore.getInstance()

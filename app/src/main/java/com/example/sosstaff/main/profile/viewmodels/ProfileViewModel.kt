@@ -6,8 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.sosstaff.main.profile.repository.ProfileRepository
 import com.example.sosstaff.models.StaffUser
-import javax.inject.Inject
-
 
 class ProfileViewModel(
     private val profileRepository: ProfileRepository

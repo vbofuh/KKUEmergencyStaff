@@ -3,15 +3,15 @@ package com.example.sosstaff.main.profile
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sosstaff.databinding.ActivityEditProfileBinding
 import com.example.sosstaff.main.profile.viewmodels.ProfileViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EditProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditProfileBinding
-    private val viewModel: ProfileViewModel by viewModels()
+    private val viewModel: ProfileViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

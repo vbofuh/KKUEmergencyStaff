@@ -9,8 +9,6 @@ import com.google.firebase.firestore.Query
 import com.example.sosstaff.models.ChatRoom
 import com.example.sosstaff.models.Message
 import java.util.Date
-import javax.inject.Inject
-import javax.inject.Singleton
 
 class ChatRepository {
     private val firestore = FirebaseFirestore.getInstance()

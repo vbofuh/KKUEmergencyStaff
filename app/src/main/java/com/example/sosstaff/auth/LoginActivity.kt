@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sosstaff.R
 import com.example.sosstaff.auth.repository.AuthRepository
 import com.example.sosstaff.main.MainContainer
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,7 +22,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginButton: Button
     private lateinit var forgotPasswordButton: Button
     private lateinit var progressBar: ProgressBar
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +34,6 @@ class LoginActivity : AppCompatActivity() {
         loginButton = findViewById(R.id.loginButton)
         forgotPasswordButton = findViewById(R.id.forgotPasswordButton)
         progressBar = findViewById(R.id.progressBar)
-
-        // ตั้งค่า ViewModel
-        val repository = AuthRepository()
-        val factory = LoginViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory)[LoginViewModel::class.java]
 
         // ตั้งค่าการสังเกตการณ์ LiveData
         observeViewModel()

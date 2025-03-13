@@ -17,6 +17,7 @@ import com.example.sosstaff.databinding.ActivityIncidentDetailBinding
 import com.example.sosstaff.main.chat.ChatActivity
 import com.example.sosstaff.main.incidents.viewmodels.IncidentsViewModel
 import com.example.sosstaff.models.Incident
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class IncidentDetailActivity : AppCompatActivity() {
 
@@ -25,7 +26,7 @@ class IncidentDetailActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityIncidentDetailBinding
-    private val viewModel: IncidentsViewModel by viewModels()
+    private val viewModel: IncidentsViewModel by viewModel()
 
     private var currentIncident: Incident? = null
     private var incidentId: String = ""

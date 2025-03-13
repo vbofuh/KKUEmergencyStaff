@@ -14,13 +14,14 @@ import com.example.sosstaff.R
 import com.example.sosstaff.auth.LoginActivity
 import com.example.sosstaff.databinding.FragmentProfileBinding
 import com.example.sosstaff.main.profile.viewmodels.ProfileViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ProfileViewModel by viewModels()
+    private val viewModel: ProfileViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -16,13 +16,14 @@ import com.example.sosstaff.databinding.FragmentIncidentsBinding
 import com.example.sosstaff.main.incidents.adapters.IncidentAdapter
 import com.example.sosstaff.main.incidents.viewmodels.IncidentsViewModel
 import com.example.sosstaff.models.Incident
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class IncidentsFragment : Fragment() {
 
     private var _binding: FragmentIncidentsBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: IncidentsViewModel by viewModels()
+    private val viewModel: IncidentsViewModel by viewModel()
     private lateinit var activeIncidentsAdapter: IncidentAdapter
     private lateinit var completedIncidentsAdapter: IncidentAdapter
 
