@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.example.sosstaff.models.ChatRoom
 import com.example.sosstaff.models.Message
+import com.google.firebase.firestore.FieldValue
 import java.util.Date
 
 class ChatRepository {
@@ -114,6 +115,26 @@ class ChatRepository {
         val resultLiveData = MutableLiveData<Boolean>()
         val currentUser = auth.currentUser
 
+        val newMessage = Message(
+            chatId = chatId,
+            senderId = currentUser.uid,
+            senderName = staffName,
+            senderType = "staff", // Important to identify staff messages
+            message = messageText,
+            timestamp = Date(),
+            isRead = false
+        )
+
+        messagesCollection.add(newMessage)
+
+        firestore.collection(chatsCollection)
+            .document(chatId)
+            .update(mapOf(
+                "lastMessage" to messageText,
+                "lastMessageTime" to Date(),
+                "userUnreadCount" to FieldValue.increment(1)
+            ))
+
         if (currentUser == null) {
             resultLiveData.value = false
             return resultLiveData
@@ -181,6 +202,19 @@ class ChatRepository {
     fun assignChatRoom(chatId: String): LiveData<Boolean> {
         val resultLiveData = MutableLiveData<Boolean>()
         val currentUser = auth.currentUser
+
+        incidentsCollection.document(incidentId)
+            .update(mapOf(
+                "assignedStaffId" to currentUser.uid,
+                "assignedStaffName" to staffName,
+                "status" to "เจ้าหน้าที่รับเรื่องแล้ว",
+                "lastUpdatedAt" to Date()
+            ))
+        chatsCollection.document(incidentId)
+            .update(mapOf(
+                "staffId" to currentUser.uid,
+                "staffName" to staffName
+            ))
 
         if (currentUser == null) {
             resultLiveData.value = false

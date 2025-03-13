@@ -31,29 +31,6 @@ class IncidentsFragment : Fragment() {
 
     // เพิ่มแท็บใหม่สำหรับเหตุการณ์รอรับเรื่อง
     val unassignedTab = binding.tabLayout.newTab().setText("รอรับเรื่อง")
-    binding.tabLayout.addTab(unassignedTab)
-
-// เพิ่มเงื่อนไขการกรองเหตุการณ์
-    when (tab?.position) {
-        0 -> filterIncidents("all")
-        1 -> filterIncidents("active")
-        2 -> filterIncidents("completed")
-        3 -> filterIncidents("unassigned")
-    }
-
-    fun filterIncidents(filter: String) {
-        when (filter) {
-            "all" -> adapter.submitList(viewModel.filteredActiveIncidents.value)
-            "active" -> adapter.submitList(viewModel.filteredActiveIncidents.value?.filter { it.isActive() })
-            "completed" -> adapter.submitList(viewModel.filteredCompletedIncidents.value)
-            "unassigned" -> adapter.submitList(viewModel.filteredActiveIncidents.value?.filter {
-                it.assignedStaffId.isEmpty() && it.status == "รอรับเรื่อง"
-            })
-        }
-
-        // Check for empty state
-        updateEmptyStateVisibility()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -201,25 +178,6 @@ class IncidentsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun assignIncident(incidentId: String): LiveData<Boolean> {
-        val resultLiveData = MutableLiveData<Boolean>()
-        val currentUser = auth.currentUser
-
-        incidentsCollection.document(incidentId)
-            .update(mapOf(
-                "staffId" to currentUser?.uid,
-                "status" to "เจ้าหน้าที่รับเรื่องแล้ว"
-            ))
-            .addOnSuccessListener {
-                resultLiveData.value = true
-            }
-            .addOnFailureListener {
-                resultLiveData.value = false
-            }
-
-        return resultLiveData
     }
 
 }
