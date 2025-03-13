@@ -18,13 +18,14 @@ import com.example.sosstaff.models.ChatRoom
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
 class ChatListFragment : Fragment() {
 
     private var _binding: FragmentChatListBinding? = null
     private val binding get() = _binding!!
 
     // ใช้ Koin เพื่อฉีด viewModel
-    private val viewModel: ChatViewModel by viewModel()
+    private val viewModel: ChatViewModel by view
     private lateinit var chatRoomAdapter: ChatRoomAdapter
     private lateinit var unassignedChatRoomAdapter: ChatRoomAdapter
 

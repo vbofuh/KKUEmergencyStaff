@@ -9,7 +9,7 @@ import com.example.sosstaff.models.StaffUser
 import javax.inject.Inject
 
 
-class ProfileViewModel @Inject constructor(
+class ProfileViewModel(
     private val profileRepository: ProfileRepository
 ) : ViewModel() {
 
