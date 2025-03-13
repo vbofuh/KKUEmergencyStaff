@@ -24,14 +24,19 @@ class MainContainer : AppCompatActivity() {
     // ใช้ Koin เพื่อฉีด authRepository แทนการประกาศแบบเดิม
     private val authRepository: AuthRepository by inject()
 
-    // เก็บ Fragment ไว้ใช้ซ้ำ
-    private val incidentsFragment = IncidentsFragment()
-    private val chatListFragment = ChatListFragment()
-    private val profileFragment = ProfileFragment()
+    // Don't initialize fragments in class declaration - move to onCreate
+    private lateinit var incidentsFragment: IncidentsFragment
+    private lateinit var chatListFragment: ChatListFragment
+    private lateinit var profileFragment: ProfileFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_container)
+
+        // Initialize fragments here
+        incidentsFragment = IncidentsFragment()
+        chatListFragment = ChatListFragment()
+        profileFragment = ProfileFragment()
 
         // สร้างช่องทางการแจ้งเตือน
         NotificationUtils.createNotificationChannels(this)
@@ -77,7 +82,7 @@ class MainContainer : AppCompatActivity() {
                 }
                 startActivity(chatIntent)
                 // เปลี่ยน tab ไปยังแชท
-                bottomNavigation.selectedItemId = R.id.nav_chat
+                bottomNavigation.selectedItemId = R.id.navigation_chat
             }
         }
     }

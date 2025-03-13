@@ -52,12 +52,12 @@ class IncidentAdapter(
             // กำหนดวันและเวลา
             if (incident.status == "เสร็จสิ้น" && incident.completedAt != null) {
                 // แสดงวันที่เสร็จสิ้น
-                tvDate.text = DateUtils.formatDate(incident.completedAt.time)
-                tvTime.text = DateUtils.formatTime(incident.completedAt.time)
+                tvDate.text = DateUtils.formatDate(incident.completedAt) // Fix: Changed from incident.completedAt.time
+                tvTime.text = DateUtils.formatTime(incident.completedAt) // Fix: Changed from incident.completedAt.time
             } else {
                 // แสดงวันที่รายงาน
-                tvDate.text = DateUtils.formatDate(incident.reportedAt.time)
-                tvTime.text = DateUtils.formatTime(incident.reportedAt.time)
+                tvDate.text = DateUtils.formatDate(incident.reportedAt) // Fix: Changed from incident.reportedAt.time
+                tvTime.text = DateUtils.formatTime(incident.reportedAt) // Fix: Changed from incident.reportedAt.time
             }
 
             // ตั้งค่าการทำงานเมื่อคลิก

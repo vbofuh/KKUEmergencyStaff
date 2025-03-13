@@ -17,12 +17,42 @@ object DateUtils {
         return dateFormat.format(Date(timestamp))
     }
 
+    // Add overload for Date type
+    fun formatDate(date: Date): String {
+        return dateFormat.format(date)
+    }
+
+    // Add overload for long type without conversion
+    fun formatDate(timestamp: Long?): String {
+        return if (timestamp != null) dateFormat.format(Date(timestamp)) else ""
+    }
+
     fun formatDateTime(timestamp: Long): String {
         return dateTimeFormat.format(Date(timestamp))
     }
 
+    // Add overload for Date type
+    fun formatDateTime(date: Date?): String {
+        return if (date != null) dateTimeFormat.format(date) else ""
+    }
+
+    // Add overload for Long type without conversion
+    fun formatDateTime(timestamp: Long?): String {
+        return if (timestamp != null) dateTimeFormat.format(Date(timestamp)) else ""
+    }
+
     fun formatTime(timestamp: Long): String {
         return timeFormat.format(Date(timestamp))
+    }
+
+    // Add overload for Date type
+    fun formatTime(date: Date?): String {
+        return if (date != null) timeFormat.format(date) else ""
+    }
+
+    // Add overload for Long type without conversion
+    fun formatTime(timestamp: Long?): String {
+        return if (timestamp != null) timeFormat.format(Date(timestamp)) else ""
     }
 
     fun getRelativeTimeSpan(timestamp: Long): String {
@@ -76,5 +106,22 @@ object DateUtils {
             hours > 0 -> "$hours ชั่วโมง $minutes นาที"
             else -> "$minutes นาที"
         }
+    }
+
+    // Add overload for Date parameters
+    fun calculateDuration(startDate: Date, endDate: Date?): String {
+        if (endDate == null) return ""
+
+        val startTime = startDate.time
+        val endTime = endDate.time
+
+        return calculateDuration(startTime, endTime)
+    }
+
+    // Add overload for long parameters where nulls are possible
+    fun calculateDuration(startTime: Long?, endTime: Long?): String {
+        if (startTime == null || endTime == null) return ""
+
+        return calculateDuration(startTime, endTime)
     }
 }

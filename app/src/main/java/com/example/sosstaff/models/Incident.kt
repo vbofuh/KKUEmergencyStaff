@@ -20,9 +20,9 @@ data class Incident(
     val status: String = "รอรับเรื่อง", // รอรับเรื่อง, เจ้าหน้าที่รับเรื่องแล้ว, กำลังดำเนินการ, เสร็จสิ้น
     val assignedStaffId: String = "",
     val assignedStaffName: String = "",
-    val reportedAt: Long = System.currentTimeMillis(),
-    val lastUpdatedAt: Long = System.currentTimeMillis(),
-    val completedAt: Long? = null
+    val reportedAt: Long = System.currentTimeMillis(),   // Changed from Date to Long
+    val lastUpdatedAt: Long = System.currentTimeMillis(), // Changed from Date to Long
+    val completedAt: Long? = null                         // Changed from Date? to Long?
 ) {
     // Method to check if the incident is still active
     fun isActive(): Boolean {

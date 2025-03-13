@@ -163,7 +163,7 @@ class IncidentDetailActivity : AppCompatActivity() {
         binding.tvLocation.text = incident.location
         binding.tvRelationToVictim.text = incident.relationToVictim
         binding.tvAdditionalInfo.text = incident.additionalInfo
-        binding.tvReportedAt.text = DateUtils.formatDateTime(incident.reportedAt.time)
+        binding.tvReportedAt.text = DateUtils.formatDateTime(incident.reportedAt)  // Fix: changed from incident.reportedAt.time
 
         // ตั้งค่าสถานะปัจจุบัน
         val statusPosition = getStatusPosition(incident.status)
@@ -178,13 +178,13 @@ class IncidentDetailActivity : AppCompatActivity() {
         }
 
         if (incident.status == "เสร็จสิ้น" && incident.completedAt != null) {
-            binding.tvCompletedAt.text = DateUtils.formatDateTime(incident.completedAt.time)
+            binding.tvCompletedAt.text = DateUtils.formatDateTime(incident.completedAt)  // Fix: changed from incident.completedAt.time
             binding.completedAtLayout.visibility = View.VISIBLE
 
             // คำนวณระยะเวลาดำเนินการ
             val duration = DateUtils.calculateDuration(
-                incident.reportedAt.time,
-                incident.completedAt.time
+                incident.reportedAt,  // Fix: changed from incident.reportedAt.time
+                incident.completedAt  // Fix: changed from incident.completedAt.time
             )
             binding.tvDuration.text = duration
             binding.durationLayout.visibility = View.VISIBLE

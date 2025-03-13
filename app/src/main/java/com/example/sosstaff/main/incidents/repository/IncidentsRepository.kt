@@ -129,7 +129,7 @@ class IncidentsRepository {
         }
 
         // If changing to "เจ้าหน้าที่รับเรื่องแล้ว" and no staff assigned, assign current staff
-        if (newStatus == "เจ้าหน้าที่รับเรื่องแล้ว") {
+        if (newStatus == "เจ้าหน้าที่รับเรื่องแล้ว" && currentUser != null) {
             // Check current incident
             firestore.collection(incidentsCollection)
                 .document(incidentId)
@@ -217,6 +217,4 @@ class IncidentsRepository {
 
         return incidentsLiveData
     }
-
-
 }

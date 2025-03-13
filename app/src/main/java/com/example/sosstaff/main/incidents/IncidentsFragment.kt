@@ -8,9 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.example.sosstaff.R
@@ -29,8 +26,8 @@ class IncidentsFragment : Fragment() {
     private lateinit var activeIncidentsAdapter: IncidentAdapter
     private lateinit var completedIncidentsAdapter: IncidentAdapter
 
-    // เพิ่มแท็บใหม่สำหรับเหตุการณ์รอรับเรื่อง
-    val unassignedTab = binding.tabLayout.newTab().setText("รอรับเรื่อง")
+    // Remove this line - it's causing the NullPointerException
+    // val unassignedTab = binding.tabLayout.newTab().setText("รอรับเรื่อง")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -179,5 +176,4 @@ class IncidentsFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }
