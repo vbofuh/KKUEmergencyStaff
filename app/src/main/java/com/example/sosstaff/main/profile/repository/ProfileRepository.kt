@@ -159,11 +159,14 @@ class ProfileRepository {
 
         try {
             if (currentUser != null) {
-                // ลบ FCM Token
                 firestore.collection(staffCollection)
                     .document(currentUser.uid)
                     .update("fcmToken", "")
-                    .addOnCompleteListener {
+                    .addOnSuccessListener {
+                        auth.signOut()
+                        resultLiveData.value = true
+                    }
+                    .addOnFailureListener {
                         auth.signOut()
                         resultLiveData.value = true
                     }
@@ -172,7 +175,8 @@ class ProfileRepository {
                 resultLiveData.value = true
             }
         } catch (e: Exception) {
-            resultLiveData.value = false
+            auth.signOut()
+            resultLiveData.value = true
         }
 
         return resultLiveData

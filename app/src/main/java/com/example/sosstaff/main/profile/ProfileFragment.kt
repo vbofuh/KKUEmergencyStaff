@@ -96,13 +96,8 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        // สังเกตการณ์ผลลัพธ์การออกจากระบบ
         viewModel.logoutResult.observe(viewLifecycleOwner) { success ->
-            if (success) {
-                navigateToLogin()
-            } else {
-                Toast.makeText(requireContext(), "ไม่สามารถออกจากระบบได้", Toast.LENGTH_SHORT).show()
-            }
+            navigateToLogin()
         }
     }
 

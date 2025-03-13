@@ -85,16 +85,16 @@ class MainContainer : AppCompatActivity() {
     private fun setupBottomNavigation() {
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_incidents -> loadFragment(incidentsFragment)
-                R.id.nav_chat -> loadFragment(chatListFragment)
-                R.id.nav_profile -> loadFragment(profileFragment)
+                R.id.navigation_incidents -> loadFragment(incidentsFragment)
+                R.id.navigation_chat -> loadFragment(chatListFragment)
+                R.id.navigation_profile -> loadFragment(profileFragment)
                 else -> false
             }
             true
         }
 
         // สร้าง Badge สำหรับแสดงจำนวนข้อความที่ยังไม่ได้อ่าน
-        chatBadge = bottomNavigation.getOrCreateBadge(R.id.nav_chat)
+        chatBadge = bottomNavigation.getOrCreateBadge(R.id.navigation_chat)
         chatBadge?.isVisible = false
     }
 

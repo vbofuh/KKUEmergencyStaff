@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.SOSStaff" parent="Theme.AppCompat.Light.NoActionBar" />
+    <style name="Theme.SOSStaff" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Your customizations here -->
+        <item name="colorPrimary">@color/myred</item>
+        <item name="colorPrimaryDark">@color/mylightred</item>
+        <item name="colorAccent">@color/myred</item>
+    </style>
 </resources>
