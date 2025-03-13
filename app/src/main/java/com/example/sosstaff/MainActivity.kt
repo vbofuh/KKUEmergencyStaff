@@ -13,9 +13,10 @@ import com.example.sosstaff.main.MainContainer
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
+    // app/src/main/java/com/example/sosstaff/MainActivity.kt
+// Update the onCreate method:
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        val db = FirebaseFirestore.getInstance()
-        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
         // Initialize Firebase Auth
@@ -24,42 +25,39 @@ class MainActivity : AppCompatActivity() {
         // Check if user is signed in
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            // ตรวจสอบว่าผู้ใช้เป็นเจ้าหน้าที่
+            // Check if the user is a staff member
             checkIfUserIsStaff(currentUser.uid)
         } else {
-            // ไม่มีผู้ใช้ล็อกอินอยู่
+            // No user is signed in
             navigateToLogin()
+        }
+
+        // Handle notification intent
+        handleIntent(intent)
+    }
+
+    private fun handleIntent(intent: Intent) {
+        val incidentId = intent.getStringExtra("incidentId")
+        val chatId = intent.getStringExtra("chatId")
+
+        // Store these values to pass to MainContainer when launched
+        if (incidentId != null || chatId != null) {
+            val extras = Bundle()
+            if (incidentId != null) extras.putString("incidentId", incidentId)
+            if (chatId != null) extras.putString("chatId", chatId)
+
+            // Store for later use
+            pendingNavigationExtras = extras
         }
     }
 
-    private fun checkIfUserIsStaff(uid: String) {
-        val db = FirebaseFirestore.getInstance()
-        db.collection("staff").document(uid)
-            .get()
-            .addOnSuccessListener { document ->
-                if (document != null && document.exists()) {
-                    // ผู้ใช้เป็นเจ้าหน้าที่
-                    navigateToMainContainer()
-                } else {
-                    // ผู้ใช้ไม่ใช่เจ้าหน้าที่
-                    auth.signOut()
-                    navigateToLogin()
-                }
-            }
-            .addOnFailureListener {
-                // เกิดข้อผิดพลาดในการตรวจสอบ
-                auth.signOut()
-                navigateToLogin()
-            }
-    }
-
-    private fun navigateToLogin() {
-        startActivity(Intent(this, LoginActivity::class.java))
-        finish()
-    }
-
     private fun navigateToMainContainer() {
-        startActivity(Intent(this, MainContainer::class.java))
+        val intent = Intent(this, MainContainer::class.java)
+        // Pass any stored navigation data
+        if (pendingNavigationExtras != null) {
+            intent.putExtras(pendingNavigationExtras!!)
+        }
+        startActivity(intent)
         finish()
     }
 }

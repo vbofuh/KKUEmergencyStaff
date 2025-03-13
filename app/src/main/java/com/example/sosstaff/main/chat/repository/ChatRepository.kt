@@ -187,7 +187,7 @@ class ChatRepository {
             return resultLiveData
         }
 
-        // ดึงข้อมูลเจ้าหน้าที่
+        // Get staff info
         firestore.collection("staff")
             .document(currentUser.uid)
             .get()
@@ -195,19 +195,20 @@ class ChatRepository {
                 if (staffDoc.exists()) {
                     val staffName = staffDoc.getString("name") ?: "เจ้าหน้าที่"
 
-                    // อัปเดตข้อมูลในห้องแชท
+                    // Update chat room
                     firestore.collection(chatRoomsCollection)
                         .document(chatId)
                         .update(
                             mapOf(
                                 "staffId" to currentUser.uid,
-                                "staffName" to staffName
+                                "staffName" to staffName,
+                                "staffUnreadCount" to 0 // Reset unread count when assigning
                             )
                         )
                         .addOnSuccessListener {
-                            // อัปเดตข้อมูลในเหตุการณ์ด้วย
+                            // Also update incident
                             firestore.collection("incidents")
-                                .document(chatId) // ใช้ ID เดียวกัน
+                                .document(chatId) // Using same ID
                                 .update(
                                     mapOf(
                                         "assignedStaffId" to currentUser.uid,
@@ -296,5 +297,28 @@ class ChatRepository {
                     }
                 }
         }
+    }
+
+    fun markMessagesAsRead(chatId: String) {
+        val userId = auth.currentUser?.uid ?: return
+
+        // Find messages in this chat that were not sent by current user and are unread
+        messagesCollection
+            .whereEqualTo("chatId", chatId)
+            .whereNotEqualTo("senderId", userId)
+            .whereEqualTo("isRead", false)
+            .get()
+            .addOnSuccessListener { documents ->
+                // Mark each message as read
+                for (document in documents) {
+                    document.reference.update("isRead", true)
+                }
+
+                // Reset the unread counter in the chat room
+                if (documents.size() > 0) {
+                    chatsCollection.document(chatId)
+                        .update("staffUnreadCount", 0)
+                }
+            }
     }
 }

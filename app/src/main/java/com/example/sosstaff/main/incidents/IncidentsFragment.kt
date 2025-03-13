@@ -42,14 +42,17 @@ class IncidentsFragment : Fragment() {
     }
 
     fun filterIncidents(filter: String) {
-        val incidents = when (filter) {
-            "all" -> allIncidents
-            "active" -> activeIncidents
-            "completed" -> completedIncidents
-            "unassigned" -> unassignedIncidents
-            else -> emptyList()
+        when (filter) {
+            "all" -> adapter.submitList(viewModel.filteredActiveIncidents.value)
+            "active" -> adapter.submitList(viewModel.filteredActiveIncidents.value?.filter { it.isActive() })
+            "completed" -> adapter.submitList(viewModel.filteredCompletedIncidents.value)
+            "unassigned" -> adapter.submitList(viewModel.filteredActiveIncidents.value?.filter {
+                it.assignedStaffId.isEmpty() && it.status == "รอรับเรื่อง"
+            })
         }
-        adapter.submitList(incidents)
+
+        // Check for empty state
+        updateEmptyStateVisibility()
     }
 
     override fun onCreateView(

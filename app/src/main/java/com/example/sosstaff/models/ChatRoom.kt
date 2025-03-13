@@ -15,8 +15,8 @@ data class ChatRoom(
     val staffName: String = "", // ชื่อเจ้าหน้าที่
     val lastMessage: String = "",
     val lastMessageTime: Date = Date(),
-    val userUnreadCount: Int = 0, // จำนวนข้อความที่ผู้ใช้ยังไม่ได้อ่าน
-    val staffUnreadCount: Int = 0, // จำนวนข้อความที่เจ้าหน้าที่ยังไม่ได้อ่าน
+    val staffUnreadCount: Int = 0,
+    val userUnreadCount: Int = 0,
     val active: Boolean = true // ห้องแชทยังใช้งานได้หรือไม่
 ) {
     // เมธอดสำหรับตรวจสอบว่าห้องแชทนี้มีเจ้าหน้าที่รับผิดชอบแล้วหรือยัง

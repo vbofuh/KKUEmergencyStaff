@@ -45,7 +45,7 @@ class ChatActivity : AppCompatActivity() {
         observeViewModel()
 
         // เลือกห้องแชท
-        viewModel.selectChatRoom(chatId)
+        viewModel.markMessagesAsRead(chatId)
     }
 
     private fun setupUI() {

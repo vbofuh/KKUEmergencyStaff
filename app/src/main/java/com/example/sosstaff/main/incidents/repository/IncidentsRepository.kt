@@ -85,22 +85,18 @@ class IncidentsRepository {
         val resultLiveData = MutableLiveData<Boolean>()
         val currentUser = auth.currentUser
 
-        if (currentUser == null) {
-            resultLiveData.value = false
-            return resultLiveData
-        }
-
+        // Add timestamp to updates
         val updates = hashMapOf<String, Any>(
             "status" to newStatus,
             "lastUpdatedAt" to Date()
         )
 
-        // ถ้าเปลี่ยนเป็นเสร็จสิ้น ให้เพิ่มเวลาเสร็จสิ้น
+        // If completing the incident, add completedAt
         if (newStatus == "เสร็จสิ้น") {
             updates["completedAt"] = Date()
 
-            // อัปเดตสถานะห้องแชทให้ไม่ใช้งาน
-            firestore.collection(chatCollection)
+            // Also update chat room status to inactive
+            firestore.collection("chats")
                 .document(incidentId)
                 .update("active", false)
         }

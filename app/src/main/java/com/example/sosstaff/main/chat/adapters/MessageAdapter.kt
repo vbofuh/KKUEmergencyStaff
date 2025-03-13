@@ -109,25 +109,25 @@ class MessageAdapter(
 
     // ViewHolder สำหรับข้อความที่ส่งโดยเจ้าหน้าที่
     class SentMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val tvMessage: TextView = itemView.findViewById(R.id.tvMessage)
-        private val tvTime: TextView = itemView.findViewById(R.id.tvTime)
+        private val messageText: TextView = itemView.findViewById(R.id.tvMessage)
+        private val timeText: TextView = itemView.findViewById(R.id.tvTime)
 
         fun bind(message: Message) {
-            tvMessage.text = message.message
-            tvTime.text = message.getFormattedTime()
+            messageText.text = message.message
+            timeText.text = message.getFormattedTime()
         }
     }
 
     // ViewHolder สำหรับข้อความที่รับจากผู้ใช้
     class ReceivedMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val tvMessage: TextView = itemView.findViewById(R.id.tvMessage)
-        private val tvTime: TextView = itemView.findViewById(R.id.tvTime)
-        private val tvSenderName: TextView = itemView.findViewById(R.id.tvSenderName)
+        private val messageText: TextView = itemView.findViewById(R.id.tvMessage)
+        private val timeText: TextView = itemView.findViewById(R.id.tvTime)
+        private val nameText: TextView = itemView.findViewById(R.id.tvSenderName)
 
         fun bind(message: Message) {
-            tvMessage.text = message.message
-            tvTime.text = message.getFormattedTime()
-            tvSenderName.text = message.senderName
+            messageText.text = message.message
+            timeText.text = message.getFormattedTime()
+            nameText.text = message.senderName
         }
     }
 

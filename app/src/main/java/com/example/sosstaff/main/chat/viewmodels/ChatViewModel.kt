@@ -131,4 +131,7 @@ class ChatViewModel(
         ACTIVE,     // ใช้งานอยู่
         COMPLETED   // เสร็จสิ้นแล้ว
     }
+    fun markMessagesAsRead(chatId: String) {
+        chatRepository.markMessagesAsRead(chatId)
+    }
 }
